@@ -44,8 +44,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'Appsync_Chat_App' do
-  # Pods for Appsync_Chat_App
+target 'appsync_chat_app' do
+  # Pods for appsync_chat_app
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -77,7 +77,7 @@ target 'Appsync_Chat_App' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'Appsync_Chat_AppTests' do
+  target 'appsync_chat_appTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -94,10 +94,10 @@ target 'Appsync_Chat_App' do
   end
 end
 
-target 'Appsync_Chat_App-tvOS' do
-  # Pods for Appsync_Chat_App-tvOS
+target 'appsync_chat_app-tvOS' do
+  # Pods for appsync_chat_app-tvOS
 
-  target 'Appsync_Chat_App-tvOSTests' do
+  target 'appsync_chat_app-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

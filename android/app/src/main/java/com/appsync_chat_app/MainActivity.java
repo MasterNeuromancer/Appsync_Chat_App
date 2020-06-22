@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "Appsync_Chat_App";
+    return "appsync_chat_app";
   }
 }

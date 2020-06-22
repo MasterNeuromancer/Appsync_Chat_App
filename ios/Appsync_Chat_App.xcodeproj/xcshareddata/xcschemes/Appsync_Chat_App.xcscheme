@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Appsync_Chat_App.app"
-               BlueprintName = "Appsync_Chat_App"
-               ReferencedContainer = "container:Appsync_Chat_App.xcodeproj">
+               BuildableName = "appsync_chat_app.app"
+               BlueprintName = "appsync_chat_app"
+               ReferencedContainer = "container:appsync_chat_app.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "Appsync_Chat_AppTests.xctest"
-               BlueprintName = "Appsync_Chat_AppTests"
-               ReferencedContainer = "container:Appsync_Chat_App.xcodeproj">
+               BuildableName = "appsync_chat_appTests.xctest"
+               BlueprintName = "appsync_chat_appTests"
+               ReferencedContainer = "container:appsync_chat_app.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Appsync_Chat_App.app"
-            BlueprintName = "Appsync_Chat_App"
-            ReferencedContainer = "container:Appsync_Chat_App.xcodeproj">
+            BuildableName = "appsync_chat_app.app"
+            BlueprintName = "appsync_chat_app"
+            ReferencedContainer = "container:appsync_chat_app.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Appsync_Chat_App.app"
-            BlueprintName = "Appsync_Chat_App"
-            ReferencedContainer = "container:Appsync_Chat_App.xcodeproj">
+            BuildableName = "appsync_chat_app.app"
+            BlueprintName = "appsync_chat_app"
+            ReferencedContainer = "container:appsync_chat_app.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
