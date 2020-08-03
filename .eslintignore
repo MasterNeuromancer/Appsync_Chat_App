@@ -1,0 +1,4 @@
+src/graphql
+aws-exports.js
+package.json
+amplify
