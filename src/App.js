@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
 import { withAuthenticator } from 'aws-amplify-react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import RootNavigator from './Components/RootNavigator';
 
 const App = () => {
-
   return (
-    <View style={styles.container}>
-        <Text>Hello From the App Page!</Text>
-    </View>
+    <NavigationContainer>
+      <RootNavigator/>
+    </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', padding: 20 },
-  todo: {  marginBottom: 15 },
-  input: { height: 50, backgroundColor: '#ddd', marginBottom: 10, padding: 8 },
-  todoName: { fontSize: 18 }
-})
 
 export default withAuthenticator(App);
