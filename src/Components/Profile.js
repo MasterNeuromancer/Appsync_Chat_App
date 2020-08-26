@@ -27,7 +27,6 @@ export default ({ navigation }) => {
                     onPress={_signOut}
                 />
             </View>
-            
         </View>
     );
 }
