@@ -1,27 +1,12 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
-import { API, Auth } from 'aws-amplify';
 
-import { getUser } from '../graphql/queries';
+import { useUserData } from '../lib/User';
 
-export default ({ navigation }) => {
-    useEffect(() => {
-        fetchUser();
-    });
+const HomeScreen = ({ navigation }) => {
+    const user =  useUserData();
 
-    async function fetchUser() {
-        const authUser = Auth.currentAuthenticatedUser().then(user => console.log('user =====>', user));
-        console.log('current auth user =========>', authUser);
-        // try {
-        //     const userData = await API.graphql({
-        //         query: getUser,
-        //         variables: { limit: 1000 }
-        //     });
-        //     console.log('user data: ', userData);
-        // } catch (err) {
-        //     console.log('error: ', err);
-        // }
-    }
+    console.log('user on home page ====>', user);
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -35,3 +20,5 @@ export default ({ navigation }) => {
         </View>
     );
 };
+
+export default HomeScreen;
