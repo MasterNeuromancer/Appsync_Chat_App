@@ -2,7 +2,7 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Home from './Home';
+import HomeScreen from './Home';
 import Conversations from './Conversations';
 import Contacts from './Contacts';
 import Profile from './Profile';
@@ -21,7 +21,7 @@ export default () => {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="home-variant-outline" color={color} size={24} />
