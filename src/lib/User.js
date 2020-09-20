@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { API, graphqlOperation, Auth } from 'aws-amplify';
+import { API, graphqlOperation, Auth, a } from 'aws-amplify';
 import { getUser } from '../graphql/queries';
 import { createUser } from '../graphql/mutations';
 
@@ -9,12 +9,12 @@ export const useUserData = () => {
     const [authUser, setAuthUser] = useState(null);
     const [loading, setLoading] = useState(null);
 
-    const checkAuthForUser = () => {
-        const authResponse = Auth.user.username;
-        
-        if(authResponse){
-            setAuthUser(authResponse);
-        } 
+    const checkAuthForUser = async () => {
+        const authResponse = await Auth.currentAuthenticatedUser();
+        const cognitoUserName = Auth.user.username;
+        console.log('cognito username ====>', cognitoUserName);
+        console.log('auth response ======> ', authResponse);
+        setAuthUser(authResponse.)
     };
 
     useEffect(() => {
@@ -31,7 +31,8 @@ export const useUserData = () => {
                 const { user } = userResponse.data;
                 if (!user) {
                     // create user
-                    setUserData('no user found');
+                    // const createUserResponse = await API.graphql(graphqlOperation(createUser, { id: authUser } ));
+                    // console.log('creating user in appsync response ====> ', createUserResponse); 
                     setLoading(false);
                 } else {
                     console.log('user data in try catch, hook block ================>', user);
