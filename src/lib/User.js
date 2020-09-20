@@ -14,7 +14,7 @@ export const useUserData = () => {
         const cognitoUserName = Auth.user.username;
         console.log('cognito username ====>', cognitoUserName);
         console.log('auth response ======> ', authResponse);
-        setAuthUser(authResponse.)
+        // setAuthUser(authResponse.)
     };
 
     useEffect(() => {

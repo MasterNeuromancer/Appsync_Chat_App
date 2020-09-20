@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, SafeAreaView } from 'react-native';
+import styles from '../lib/Styles';
 import { Auth } from 'aws-amplify';
 
 export default ({ navigation }) => {
@@ -13,20 +14,22 @@ export default ({ navigation }) => {
     };
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>
-                Hello from Profile Screen!
-            </Text>
-            <Button
-                title='go to home screen!'
-                onPress={() => navigation.navigate('Home')}
-            />
-            <View style={{paddingVertical:10}}>
+        <SafeAreaView style={ styles.container }>
+            <View>
+                <Text>
+                    Hello from Profile Screen!
+                </Text>
                 <Button
-                    title='Sign Out'
-                    onPress={_signOut}
+                    title='go to home screen!'
+                    onPress={() => navigation.navigate('Home')}
                 />
+                <View>
+                    <Button
+                        title='Sign Out'
+                        onPress={_signOut}
+                    />
+                </View>
             </View>
-        </View>
+        </SafeAreaView>
     );
 }

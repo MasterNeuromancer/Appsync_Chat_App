@@ -1,14 +1,17 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, SafeAreaView } from 'react-native';
+import styles from '../lib/Styles';
 
 export default ({ navigation }) => (
-    <View style={{ paddingTop: 15, flex: 1 }}>
-        <Text>
-            Hello from Contacts Screen!
-        </Text>
-        <Button
-            title='go to home screen!'
-            onPress={() => navigation.navigate('Home')}
-        />
-    </View>
+    <SafeAreaView style={ styles.container }>
+        <View>
+            <Text>
+                Hello from Contacts Screen!
+            </Text>
+            <Button
+                title='go to home screen!'
+                onPress={() => navigation.navigate('Home')}
+            />
+        </View>
+    </SafeAreaView>
 );
