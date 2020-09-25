@@ -8,6 +8,7 @@ export const onCreateConversationLink = /* GraphQL */ `
       user {
         id
         username
+        screenName
         conversations {
           nextToken
         }
@@ -44,6 +45,7 @@ export const onCreateMessage = /* GraphQL */ `
       author {
         id
         username
+        screenName
         conversations {
           nextToken
         }
@@ -74,11 +76,12 @@ export const onCreateMessage = /* GraphQL */ `
     }
   }
 `;
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+export const onCreateUserData = /* GraphQL */ `
+  subscription OnCreateUserData($username: String!) {
+    onCreateUserData(username: $username) {
       id
       username
+      screenName
       conversations {
         items {
           id
@@ -105,11 +108,12 @@ export const onCreateUser = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+export const onUpdateUserData = /* GraphQL */ `
+  subscription OnUpdateUserData($username: String!) {
+    onUpdateUserData(username: $username) {
       id
       username
+      screenName
       conversations {
         items {
           id
@@ -136,11 +140,12 @@ export const onUpdateUser = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+export const onDeleteUserData = /* GraphQL */ `
+  subscription OnDeleteUserData($username: String!) {
+    onDeleteUserData(username: $username) {
       id
       username
+      screenName
       conversations {
         items {
           id

@@ -1,11 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
+export const getUserData = /* GraphQL */ `
+  query GetUserData($username: String!) {
+    getUserData(username: $username) {
       id
       username
+      screenName
       conversations {
         items {
           id
@@ -32,16 +33,25 @@ export const getUser = /* GraphQL */ `
     }
   }
 `;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
+export const listUserDatas = /* GraphQL */ `
+  query ListUserDatas(
+    $username: String
+    $filter: ModelUserDataFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUserDatas(
+      username: $username
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         username
+        screenName
         conversations {
           nextToken
         }

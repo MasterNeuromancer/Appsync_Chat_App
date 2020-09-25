@@ -1,14 +1,15 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
+export const createUserData = /* GraphQL */ `
+  mutation CreateUserData(
+    $input: CreateUserDataInput!
+    $condition: ModelUserDataConditionInput
   ) {
-    createUser(input: $input, condition: $condition) {
+    createUserData(input: $input, condition: $condition) {
       id
       username
+      screenName
       conversations {
         items {
           id
@@ -35,14 +36,15 @@ export const createUser = /* GraphQL */ `
     }
   }
 `;
-export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
+export const updateUserData = /* GraphQL */ `
+  mutation UpdateUserData(
+    $input: UpdateUserDataInput!
+    $condition: ModelUserDataConditionInput
   ) {
-    updateUser(input: $input, condition: $condition) {
+    updateUserData(input: $input, condition: $condition) {
       id
       username
+      screenName
       conversations {
         items {
           id
@@ -69,14 +71,15 @@ export const updateUser = /* GraphQL */ `
     }
   }
 `;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
+export const deleteUserData = /* GraphQL */ `
+  mutation DeleteUserData(
+    $input: DeleteUserDataInput!
+    $condition: ModelUserDataConditionInput
   ) {
-    deleteUser(input: $input, condition: $condition) {
+    deleteUserData(input: $input, condition: $condition) {
       id
       username
+      screenName
       conversations {
         items {
           id
@@ -148,6 +151,7 @@ export const createMessage = /* GraphQL */ `
       author {
         id
         username
+        screenName
         conversations {
           nextToken
         }
@@ -188,6 +192,7 @@ export const updateMessage = /* GraphQL */ `
       author {
         id
         username
+        screenName
         conversations {
           nextToken
         }
@@ -228,6 +233,7 @@ export const deleteMessage = /* GraphQL */ `
       author {
         id
         username
+        screenName
         conversations {
           nextToken
         }
@@ -268,6 +274,7 @@ export const createConversationLink = /* GraphQL */ `
       user {
         id
         username
+        screenName
         conversations {
           nextToken
         }
@@ -307,6 +314,7 @@ export const updateConversationLink = /* GraphQL */ `
       user {
         id
         username
+        screenName
         conversations {
           nextToken
         }
