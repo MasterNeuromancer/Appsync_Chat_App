@@ -17,6 +17,7 @@ export const onCreateConversationLink = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       conversationLinkUserId
       conversation {
@@ -54,6 +55,7 @@ export const onCreateMessage = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       authorId
       content
@@ -77,8 +79,8 @@ export const onCreateMessage = /* GraphQL */ `
   }
 `;
 export const onCreateUserData = /* GraphQL */ `
-  subscription OnCreateUserData($username: String!) {
-    onCreateUserData(username: $username) {
+  subscription OnCreateUserData($owner: String!) {
+    onCreateUserData(owner: $owner) {
       id
       username
       screenName
@@ -105,12 +107,13 @@ export const onCreateUserData = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateUserData = /* GraphQL */ `
-  subscription OnUpdateUserData($username: String!) {
-    onUpdateUserData(username: $username) {
+  subscription OnUpdateUserData($owner: String!) {
+    onUpdateUserData(owner: $owner) {
       id
       username
       screenName
@@ -137,12 +140,13 @@ export const onUpdateUserData = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteUserData = /* GraphQL */ `
-  subscription OnDeleteUserData($username: String!) {
-    onDeleteUserData(username: $username) {
+  subscription OnDeleteUserData($owner: String!) {
+    onDeleteUserData(owner: $owner) {
       id
       username
       screenName
@@ -169,6 +173,7 @@ export const onDeleteUserData = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
