@@ -24,7 +24,7 @@ export default ({ navigation }) => {
 
     return (
         <SafeAreaView style={ styles.container }>
-            {loading ? <ActivityIndicator animating={true} color={Colors.red800} /> : <View style={ styles.container }><Card style={ styles.container, {width: width, height: height -75}}>
+            {loading ? <ActivityIndicator animating={true} color={Colors.red800} /> : <View style={ styles.container }><Card style={ styles.container, {width: width, height: height -95}}>
                 <Card.Title title={user.username} subtitle="Card Subtitle" left={LeftContent} />
                 <Card.Content>
                 <Title>{user.username}</Title>
