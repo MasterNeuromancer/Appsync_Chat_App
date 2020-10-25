@@ -41,7 +41,7 @@ export default ({ navigation }) => {
                     <Appbar.Content title={"effortLESS Chat"} />
                 </Appbar.Header>
                 <Card style={{width: width}}>
-                    <Card.Title title={user.username} subtitle={user.screenName !== null ? user.screenName : ''} left={LeftContent} />
+                    <Card.Title title='Profile' subtitle={user.screenName !== null ? user.screenName : ''} left={LeftContent} />
                     <Card.Content>
                     <Title>{user.username}</Title>
                     <Paragraph>Card content</Paragraph>

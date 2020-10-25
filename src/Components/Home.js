@@ -8,8 +8,8 @@ import { useUserData } from '../lib/User';
 const { width } = Dimensions.get('window');
 
 export default ({ navigation }) => {
-    const user =  useUserData();
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
+    const user =  useUserData(); 
 
     useEffect(() => {
         if (user !== null) {
@@ -18,7 +18,7 @@ export default ({ navigation }) => {
     }, [user]);
 
     console.log('user on home page ====>', user);
-    const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+    const LeftContent = props => <Avatar.Icon {...props} icon='folder' />
 
     return (
         loading ? 
@@ -30,10 +30,10 @@ export default ({ navigation }) => {
                 <>  
                     <Appbar.Header width={width}>
                         <Appbar.BackAction onPress={()=>console.log('hello')} />
-                        <Appbar.Content title={"effortLESS Chat"} />
+                        <Appbar.Content title={'effortLESS Chat'} />
                     </Appbar.Header>
                     <Card style={{width: width}}>
-                        <Card.Title title={user.username} subtitle={user.screenName !== null ? user.screenName : ''} left={LeftContent} />
+                        <Card.Title title='Home' subtitle={user.screenName !== null ? user.screenName : ''} left={LeftContent} />
                         <Card.Content>
                         <Title>{user.username}</Title>
                         <Paragraph>Card content</Paragraph>
