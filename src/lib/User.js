@@ -39,18 +39,13 @@ export const useUserData = () => {
                     setLoading(false);
                 } else {
                     console.log('authUser before creating', authUser);
-                    // const createUserResponse = await API.graphql(graphqlOperation(createUserData, { input: { username: authUser } } ));
-                    // console.log('creating user in appsync response ====> ', createUserResponse);
-                    // setUserData(createUserResponse.data.createUserData); 
+                    const createUserResponse = await API.graphql(graphqlOperation(createUserData, { input: { username: authUser } } ));
+                    console.log('creating user in appsync response ====> ', createUserResponse);
+                    setUserData(createUserResponse.data.createUserData); 
                     setLoading(false);
                 }
             } catch (error) {
                 console.log('error', error);
-                if(error.data){
-                    console.log('setting user data in user hook and app state using the ERROR. Still needs to be looked into. \nThis is still broken and must not be ignored. THIS IS TECH DEBT!!!1');
-                    console.log('error data to be passed to profile and home screen', error.data.getUserData);
-                    setUserData(error.data.getUserData);
-                }
                 setLoading(false);
             }
         }

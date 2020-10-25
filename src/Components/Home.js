@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions, View, SafeAreaView } from 'react-native';
-// import { SafeAreaView } from 'react-navigation';
-// import { Card, Title, Paragraph } from 'react-native-paper';
-import { Avatar, Button, Card, Title, Paragraph, Text, ActivityIndicator, Colors  } from 'react-native-paper';
+import { Dimensions, View } from 'react-native';
+import { Avatar, Button, Card, Title, Paragraph, Appbar, ActivityIndicator, Colors  } from 'react-native-paper';
 import styles from '../lib/Styles';
 
 import { useUserData } from '../lib/User';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default ({ navigation }) => {
     const user =  useUserData();
@@ -23,20 +21,30 @@ export default ({ navigation }) => {
     const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
     return (
-        <SafeAreaView style={ styles.container }>
-            {loading ? <ActivityIndicator animating={true} color={Colors.red800} /> : <View style={ styles.container }><Card style={ styles.container, {width: width, height: height -95}}>
-                <Card.Title title={user.username} subtitle="Card Subtitle" left={LeftContent} />
-                <Card.Content>
-                <Title>{user.username}</Title>
-                <Paragraph>Card content</Paragraph>
-                </Card.Content>
-                <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-                <Card.Actions>
-                <Button>Cancel</Button>
-                <Button>Ok</Button>
-                </Card.Actions>
-                <Button onPress={() => navigation.navigate('Conversations')}>Go to Conversations</Button>
-            </Card></View>}
-        </SafeAreaView>
+        loading ? 
+                <View style={styles.container}>
+                    <ActivityIndicator animating={true} color={Colors.red800} /> 
+                </View>
+                
+            : 
+                <>  
+                    <Appbar.Header width={width}>
+                        <Appbar.BackAction onPress={()=>console.log('hello')} />
+                        <Appbar.Content title={"effortLESS Chat"} />
+                    </Appbar.Header>
+                    <Card style={{width: width}}>
+                        <Card.Title title={user.username} subtitle={user.screenName !== null ? user.screenName : ''} left={LeftContent} />
+                        <Card.Content>
+                        <Title>{user.username}</Title>
+                        <Paragraph>Card content</Paragraph>
+                        </Card.Content>
+                        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+                        <Card.Actions>
+                        <Button>Cancel</Button>
+                        <Button>Ok</Button>
+                        </Card.Actions>
+                        <Button onPress={() => navigation.navigate('Conversations')}>Go to Conversations</Button>
+                    </Card>
+                </>
     );
 };
