@@ -1,53 +1,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
+export const getUserData = /* GraphQL */ `
+  query GetUserData($username: String!) {
+    getUserData(username: $username) {
       id
       username
-      conversations {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      screenName
       createdAt
       updatedAt
     }
   }
 `;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
+export const getUserAndConversationsData = /* GraphQL */ `
+  query GetUserData($username: String!) {
+    getUserData(username: $username) {
+      id
+      username
+      conversations(limit: 10000) {
+        items {
+          id
+          conversation {
+            id
+            name
+          }
+        }
+      }
+      screenName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUserDatas = /* GraphQL */ `
+  query ListUserDatas(
+    $filter: ModelUserDataFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUserDatas(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         username
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
+        screenName
         createdAt
         updatedAt
       }
@@ -59,22 +60,12 @@ export const getConversation = /* GraphQL */ `
   query GetConversation($id: ID!) {
     getConversation(id: $id) {
       id
-      messages {
+      messages(limit: 10000) {
         items {
           id
           authorId
           content
           messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      associated {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
           createdAt
           updatedAt
         }

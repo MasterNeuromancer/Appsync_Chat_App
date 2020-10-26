@@ -1,8 +1,10 @@
-type User 
-  @model 
-  @auth(rules: [{ allow: owner, ownerField: "id", queries: null }]) {
+type UserData 
+  @model
+  @key(fields:["username"]) 
+  @aws_cognito_user_pools {
   id: ID!
   username: String!
+  screenName: String
   conversations: [ConversationLink] @connection(name: "UserLinks")
   messages: [Message] @connection(name: "UserMessages")
 	createdAt: String
@@ -29,7 +31,7 @@ type Message
   @model(subscriptions: null, queries: null) 
   @auth(rules: [{ allow: owner, ownerField: "authorId" }]) {
   id: ID!
-  author: User @connection(name: "UserMessages", keyField: "authorId")
+  author: UserData @connection(name: "UserMessages", keyField: "authorId")
   authorId: String
   content: String!
   conversation: Conversation! @connection(name: "ConversationMsgs")
@@ -45,7 +47,7 @@ type ConversationLink
     subscriptions: null
   ) {
   id: ID!
-  user: User! @connection(name: "UserLinks")
+  user: UserData! @connection(name: "UserLinks")
   conversationLinkUserId: ID
   conversation: Conversation! @connection(name: "AssociatedLinks")
   conversationLinkConversationId: ID!

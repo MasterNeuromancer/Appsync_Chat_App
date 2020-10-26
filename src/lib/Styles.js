@@ -6,4 +6,12 @@ export default StyleSheet.create({
       justifyContent: 'center', 
       alignItems: 'center'
     },
+    surface: {
+      padding: 8,
+      height: 80,
+      width: 80,
+      alignItems: 'center',
+      justifyContent: 'center',
+      elevation: 4,
+    },
 });
