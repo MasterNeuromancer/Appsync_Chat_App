@@ -31,9 +31,8 @@ export default ({ navigation }) => {
                 <View style={styles.container}>
                     <ActivityIndicator animating={true} color={Colors.red800} /> 
                 </View>
-                
-            : 
-                <>  
+            :
+                <>
                     <Appbar.Header width={width}>
                         <Appbar.BackAction onPress={()=>console.log('hello')} />
                         <Appbar.Content title={"effortLESS Chat"} />
