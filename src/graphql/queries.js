@@ -9,7 +9,6 @@ export const getUserData = /* GraphQL */ `
       screenName
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -30,20 +29,17 @@ export const getUserAndConversationsData = /* GraphQL */ `
       screenName
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const listUserDatas = /* GraphQL */ `
   query ListUserDatas(
-    $username: String
     $filter: ModelUserDataFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
     listUserDatas(
-      username: $username
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -55,7 +51,6 @@ export const listUserDatas = /* GraphQL */ `
         screenName
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }

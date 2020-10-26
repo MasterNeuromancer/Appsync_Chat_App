@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View, FlatList, Pressable } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph, Appbar, ActivityIndicator, Colors, List, Divider  } from 'react-native-paper';
+import { Avatar, Button, Card, Appbar, ActivityIndicator, Colors, List, Divider } from 'react-native-paper';
 import { useUserConversationData } from '../lib/UserAndConversations';
 import styles from '../lib/Styles';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default ({ navigation }) => {
     const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ export default ({ navigation }) => {
                         <Appbar.BackAction onPress={()=>console.log('hello')} />
                         <Appbar.Content title={"effortLESS Chat"} />
                     </Appbar.Header>
-                    <Card style={{width: width}}>
+                    <Card style={{width: width, height: height}}>
                         <Card.Title title='Conversations' left={LeftContent} />
                         <Card.Content>
                         <FlatList

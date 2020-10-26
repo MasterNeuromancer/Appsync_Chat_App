@@ -17,7 +17,6 @@ export const onCreateConversationLink = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
       conversationLinkUserId
       conversation {
@@ -59,7 +58,6 @@ export const onCreateUserData = /* GraphQL */ `
       screenName
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -71,7 +69,6 @@ export const onUpdateUserData = /* GraphQL */ `
       screenName
       createdAt
       updatedAt
-      owner
     }
   }
 `;

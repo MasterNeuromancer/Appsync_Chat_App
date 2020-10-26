@@ -12,7 +12,6 @@ export const createUserData = /* GraphQL */ `
       screenName
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -27,7 +26,6 @@ export const updateUserData = /* GraphQL */ `
       screenName
       createdAt
       updatedAt
-      owner
     }
   }
 `;

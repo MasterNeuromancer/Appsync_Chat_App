@@ -28,10 +28,10 @@ export const useUserConversationData = () => {
                 const userConversationsResponse = await API.graphql(graphqlOperation(getUserAndConversationsData, { username: authUser } ));
                 console.log('user userResponse in hook ======>', userConversationsResponse);
                 setLoading(false);
-                const user = userConversationsResponse.data.getUserAndConversationsData;
-                if (user !== null) {
-                    console.log('user data in try catch, hook block, succesfully fetch ================>', user);
-                    setUserConversationData(user);
+                const userConversations = userConversationsResponse.data.getUserData.conversations.items;
+                if (userConversations !== null) {
+                    console.log('user data in try catch, hook block, succesfully fetch ================>', userConversations);
+                    setUserConversationData(userConversations);
                     setLoading(false);
                 } 
             } catch (error) {
