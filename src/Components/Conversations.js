@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View, FlatList, Pressable } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph, Appbar, ActivityIndicator, Colors, List, Divider  } from 'react-native-paper';
+import { useUserConversationData } from '../lib/UserAndConversations';
 import styles from '../lib/Styles';
 
 const { width } = Dimensions.get('window');
 
 export default ({ navigation }) => {
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
+    const conversations = useUserConversationData();
+    
+    console.log('conversations in conversation screen', conversations);
     
     const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
     const threads = [

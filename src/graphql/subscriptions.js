@@ -43,35 +43,8 @@ export const onCreateMessage = /* GraphQL */ `
   subscription OnCreateMessage($messageConversationId: ID!) {
     onCreateMessage(messageConversationId: $messageConversationId) {
       id
-      author {
-        id
-        username
-        screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
       authorId
       content
-      conversation {
-        id
-        messages {
-          nextToken
-        }
-        associated {
-          nextToken
-        }
-        name
-        members
-        createdAt
-        updatedAt
-      }
       messageConversationId
       createdAt
       updatedAt
@@ -84,27 +57,6 @@ export const onCreateUserData = /* GraphQL */ `
       id
       username
       screenName
-      conversations {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       owner
@@ -117,60 +69,6 @@ export const onUpdateUserData = /* GraphQL */ `
       id
       username
       screenName
-      conversations {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteUserData = /* GraphQL */ `
-  subscription OnDeleteUserData($owner: String!) {
-    onDeleteUserData(owner: $owner) {
-      id
-      username
-      screenName
-      conversations {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       owner

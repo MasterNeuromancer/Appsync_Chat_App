@@ -10,27 +10,6 @@ export const createUserData = /* GraphQL */ `
       id
       username
       screenName
-      conversations {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       owner
@@ -46,63 +25,6 @@ export const updateUserData = /* GraphQL */ `
       id
       username
       screenName
-      conversations {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteUserData = /* GraphQL */ `
-  mutation DeleteUserData(
-    $input: DeleteUserDataInput!
-    $condition: ModelUserDataConditionInput
-  ) {
-    deleteUserData(input: $input, condition: $condition) {
-      id
-      username
-      screenName
-      conversations {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          authorId
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       owner
@@ -116,27 +38,6 @@ export const createConversation = /* GraphQL */ `
   ) {
     createConversation(input: $input, condition: $condition) {
       id
-      messages {
-        items {
-          id
-          authorId
-          content
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      associated {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       name
       members
       createdAt
@@ -151,35 +52,8 @@ export const createMessage = /* GraphQL */ `
   ) {
     createMessage(input: $input, condition: $condition) {
       id
-      author {
-        id
-        username
-        screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
       authorId
       content
-      conversation {
-        id
-        messages {
-          nextToken
-        }
-        associated {
-          nextToken
-        }
-        name
-        members
-        createdAt
-        updatedAt
-      }
       messageConversationId
       createdAt
       updatedAt
@@ -193,77 +67,8 @@ export const updateMessage = /* GraphQL */ `
   ) {
     updateMessage(input: $input, condition: $condition) {
       id
-      author {
-        id
-        username
-        screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
       authorId
       content
-      conversation {
-        id
-        messages {
-          nextToken
-        }
-        associated {
-          nextToken
-        }
-        name
-        members
-        createdAt
-        updatedAt
-      }
-      messageConversationId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteMessage = /* GraphQL */ `
-  mutation DeleteMessage(
-    $input: DeleteMessageInput!
-    $condition: ModelMessageConditionInput
-  ) {
-    deleteMessage(input: $input, condition: $condition) {
-      id
-      author {
-        id
-        username
-        screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      authorId
-      content
-      conversation {
-        id
-        messages {
-          nextToken
-        }
-        associated {
-          nextToken
-        }
-        name
-        members
-        createdAt
-        updatedAt
-      }
       messageConversationId
       createdAt
       updatedAt
@@ -277,70 +82,9 @@ export const createConversationLink = /* GraphQL */ `
   ) {
     createConversationLink(input: $input, condition: $condition) {
       id
-      user {
-        id
-        username
-        screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
       conversationLinkUserId
       conversation {
         id
-        messages {
-          nextToken
-        }
-        associated {
-          nextToken
-        }
-        name
-        members
-        createdAt
-        updatedAt
-      }
-      conversationLinkConversationId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateConversationLink = /* GraphQL */ `
-  mutation UpdateConversationLink(
-    $input: UpdateConversationLinkInput!
-    $condition: ModelConversationLinkConditionInput
-  ) {
-    updateConversationLink(input: $input, condition: $condition) {
-      id
-      user {
-        id
-        username
-        screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      conversationLinkUserId
-      conversation {
-        id
-        messages {
-          nextToken
-        }
-        associated {
-          nextToken
-        }
         name
         members
         createdAt

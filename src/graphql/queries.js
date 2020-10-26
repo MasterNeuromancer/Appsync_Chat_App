@@ -13,6 +13,27 @@ export const getUserData = /* GraphQL */ `
     }
   }
 `;
+export const getUserAndConversationsData = /* GraphQL */ `
+  query GetUserData($username: String!) {
+    getUserData(username: $username) {
+      id
+      username
+      conversations(limit: 10000) {
+        items {
+          id
+          conversation {
+            id
+            name
+          }
+        }
+      }
+      screenName
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const listUserDatas = /* GraphQL */ `
   query ListUserDatas(
     $username: String
@@ -32,12 +53,6 @@ export const listUserDatas = /* GraphQL */ `
         id
         username
         screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
         createdAt
         updatedAt
         owner
@@ -50,22 +65,12 @@ export const getConversation = /* GraphQL */ `
   query GetConversation($id: ID!) {
     getConversation(id: $id) {
       id
-      messages {
+      messages(limit: 10000) {
         items {
           id
           authorId
           content
           messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      associated {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
           createdAt
           updatedAt
         }

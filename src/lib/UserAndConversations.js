@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
-import { getUserData } from '../graphql/queries';
-import { createUserData } from '../graphql/mutations';
+import { getUserAndConversationsData } from '../graphql/queries';
 
-export const useUserData = () => {
+export const useUserConversationData = () => {
     const [authUser, setAuthUser] = useState(null);
-    const [userData, setUserData] = useState(null);
+    const [userConversationData, setUserConversationData] = useState(null);
     
     const [loading, setLoading] = useState(null);
 
@@ -22,25 +21,19 @@ export const useUserData = () => {
     }, [checkAuthForUser]);
 
     useEffect(() => {
-        async function fetchUserData(authUser) {
+        async function fetchUserConversationData(authUser) {
             try {
                 setLoading(true);
                 console.log('auth user in try catch', authUser);
-                const userResponse = await API.graphql(graphqlOperation(getUserData, { username: authUser } ));
-                console.log('user userResponse in hook ======>', userResponse);
+                const userConversationsResponse = await API.graphql(graphqlOperation(getUserAndConversationsData, { username: authUser } ));
+                console.log('user userResponse in hook ======>', userConversationsResponse);
                 setLoading(false);
-                const user = userResponse.data.getUserData;
+                const user = userConversationsResponse.data.getUserAndConversationsData;
                 if (user !== null) {
                     console.log('user data in try catch, hook block, succesfully fetch ================>', user);
-                    setUserData(user);
+                    setUserConversationData(user);
                     setLoading(false);
-                } else {
-                    console.log('authUser before creating', authUser);
-                    const createUserResponse = await API.graphql(graphqlOperation(createUserData, { input: { username: authUser } } ));
-                    console.log('creating user in appsync response ====> ', createUserResponse);
-                    setUserData(createUserResponse.data.createUserData); 
-                    setLoading(false);
-                }
+                } 
             } catch (error) {
                 console.log('error', error);
                 setLoading(false);
@@ -49,9 +42,9 @@ export const useUserData = () => {
 
         if (authUser) {
             console.log('got to auth user check this is it', authUser);
-            fetchUserData(authUser);
+            fetchUserConversationData(authUser);
         }
     }, [authUser]);
 
-    return userData;
+    return userConversationData;
 };
