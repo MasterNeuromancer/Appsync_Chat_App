@@ -14,7 +14,6 @@ export default ({showDialog, setShowDialog, toUser, currentUser}) => {
                     <Button 
                         mode='contained' 
                         onPress={() => {
-                            console.log('creating new conversation between');
                             CreateConversation(toUser, currentUser);
                             setShowDialog(!showDialog);
                           }

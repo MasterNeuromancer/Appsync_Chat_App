@@ -6,7 +6,7 @@ type UserData
   username: String!
   screenName: String
   conversations: [ConversationLink] @connection(name: "UserLinks")
-  messages: [Message] @connection(name: "UserMessages")
+  messages: [Message] @connection(name: "UserMessageList")
 	createdAt: String
 	updatedAt: String
 }
@@ -31,9 +31,9 @@ type Message
   @model(subscriptions: null, queries: null) 
   @aws_cognito_user_pools {
   id: ID!
-  author: UserData @connection(name: "UserMessages", keyField: "authorId")
-  authorId: String
-  content: String!
+  user: UserData @connection(name: "UserMessageList", keyField: "userId")
+  userId: String
+  text: String!
   conversation: Conversation! @connection(name: "ConversationMsgs")
   messageConversationId: ID!
 	createdAt: String
