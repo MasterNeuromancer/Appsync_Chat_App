@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "appsyncchatapp9199b350_identitypool_9199b350",
+    "identityPoolName": "appsyncchatapp9a23aa60_identitypool_9a23aa60",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "appsyn9199b350",
-    "userPoolName": "appsyncchatapp9199b350_userpool_9199b350",
+    "resourceNameTruncated": "appsyn9a23aa60",
+    "userPoolName": "appsyncchatapp9a23aa60_userpool_9a23aa60",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -18,7 +18,8 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email"
+        "email",
+        "preferred_username"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -28,11 +29,17 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "appsyn9199b350_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "appsyn9a23aa60_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "9199b350",
-    "resourceName": "appsyncchatapp9199b350",
+    "useDefault": "manual",
     "authSelections": "identityPoolAndUserPool",
+    "resourceName": "appsyncchatapp9a23aa609a23aa60",
+    "thirdPartyAuth": false,
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": "{}",
+    "hostedUI": false,
+    "userPoolGroupList": [],
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -45,10 +52,9 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
-    "usernameAttributes": [
-        "email"
-    ],
-    "userPoolGroupList": [],
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
     "dependsOn": []
 }

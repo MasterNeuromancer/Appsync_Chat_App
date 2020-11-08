@@ -29,6 +29,20 @@ export const updateUserData = /* GraphQL */ `
     }
   }
 `;
+export const deleteUserData = /* GraphQL */ `
+  mutation DeleteUserData(
+    $input: DeleteUserDataInput!
+    $condition: ModelUserDataConditionInput
+  ) {
+    deleteUserData(input: $input, condition: $condition) {
+      id
+      username
+      screenName
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createConversation = /* GraphQL */ `
   mutation CreateConversation(
     $input: CreateConversationInput!
@@ -50,23 +64,34 @@ export const createMessage = /* GraphQL */ `
   ) {
     createMessage(input: $input, condition: $condition) {
       id
-      authorId
-      content
-      messageConversationId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateMessage = /* GraphQL */ `
-  mutation UpdateMessage(
-    $input: UpdateMessageInput!
-    $condition: ModelMessageConditionInput
-  ) {
-    updateMessage(input: $input, condition: $condition) {
-      id
-      authorId
-      content
+      user {
+        id
+        username
+        screenName
+        conversations {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userId
+      text
+      conversation {
+        id
+        messages {
+          nextToken
+        }
+        associated {
+          nextToken
+        }
+        name
+        members
+        createdAt
+        updatedAt
+      }
       messageConversationId
       createdAt
       updatedAt
@@ -81,8 +106,41 @@ export const createConversationLink = /* GraphQL */ `
     createConversationLink(input: $input, condition: $condition) {
       id
       conversationLinkUserId
+      conversationLinkConversationId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateConversationLink = /* GraphQL */ `
+  mutation UpdateConversationLink(
+    $input: UpdateConversationLinkInput!
+    $condition: ModelConversationLinkConditionInput
+  ) {
+    updateConversationLink(input: $input, condition: $condition) {
+      id
+      user {
+        id
+        username
+        screenName
+        conversations {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      conversationLinkUserId
       conversation {
         id
+        messages {
+          nextToken
+        }
+        associated {
+          nextToken
+        }
         name
         members
         createdAt

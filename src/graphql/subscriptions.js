@@ -42,8 +42,34 @@ export const onCreateMessage = /* GraphQL */ `
   subscription OnCreateMessage($messageConversationId: ID!) {
     onCreateMessage(messageConversationId: $messageConversationId) {
       id
-      authorId
-      content
+      user {
+        id
+        username
+        screenName
+        conversations {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userId
+      text
+      conversation {
+        id
+        messages {
+          nextToken
+        }
+        associated {
+          nextToken
+        }
+        name
+        members
+        createdAt
+        updatedAt
+      }
       messageConversationId
       createdAt
       updatedAt
@@ -51,22 +77,96 @@ export const onCreateMessage = /* GraphQL */ `
   }
 `;
 export const onCreateUserData = /* GraphQL */ `
-  subscription OnCreateUserData($owner: String!) {
-    onCreateUserData(owner: $owner) {
+  subscription OnCreateUserData {
+    onCreateUserData {
       id
       username
       screenName
+      conversations {
+        items {
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          userId
+          text
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
   }
 `;
 export const onUpdateUserData = /* GraphQL */ `
-  subscription OnUpdateUserData($owner: String!) {
-    onUpdateUserData(owner: $owner) {
+  subscription OnUpdateUserData {
+    onUpdateUserData {
       id
       username
       screenName
+      conversations {
+        items {
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          userId
+          text
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUserData = /* GraphQL */ `
+  subscription OnDeleteUserData {
+    onDeleteUserData {
+      id
+      username
+      screenName
+      conversations {
+        items {
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          userId
+          text
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }

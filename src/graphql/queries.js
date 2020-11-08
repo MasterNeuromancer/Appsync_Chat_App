@@ -7,6 +7,27 @@ export const getUserData = /* GraphQL */ `
       id
       username
       screenName
+      conversations {
+        items {
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          userId
+          text
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -17,24 +38,27 @@ export const getUserAndConversationsData = /* GraphQL */ `
     getUserData(username: $username) {
       id
       username
-      conversations(limit: 10000) {
+      screenName
+      conversations (limit: 10000) {
         items {
-          conversation {
-            id
-            name
-            members
-            messages {
-              items {
-                id
-                content
-                createdAt
-                authorId
-              }
-            }
-          }
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
         }
       }
-      screenName
+      messages {
+        items {
+          id
+          userId
+          text
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -42,12 +66,14 @@ export const getUserAndConversationsData = /* GraphQL */ `
 `;
 export const listUserDatas = /* GraphQL */ `
   query ListUserDatas(
+    $username: String
     $filter: ModelUserDataFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
     listUserDatas(
+      username: $username
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -57,6 +83,12 @@ export const listUserDatas = /* GraphQL */ `
         id
         username
         screenName
+        conversations {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -68,12 +100,22 @@ export const getConversation = /* GraphQL */ `
   query GetConversation($id: ID!) {
     getConversation(id: $id) {
       id
-      messages(limit: 10000) {
+      messages {
         items {
           id
-          authorId
-          content
+          userId
+          text
           messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      associated {
+        items {
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
           createdAt
           updatedAt
         }
