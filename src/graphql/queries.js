@@ -19,10 +19,18 @@ export const getUserAndConversationsData = /* GraphQL */ `
       username
       conversations(limit: 10000) {
         items {
-          id
           conversation {
             id
             name
+            members
+            messages {
+              items {
+                id
+                content
+                createdAt
+                authorId
+              }
+            }
           }
         }
       }

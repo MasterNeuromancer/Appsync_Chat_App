@@ -17,7 +17,7 @@ type Conversation
     queries: { get: "getConversation" }
     subscriptions: null
   )
-  @auth(rules: [{ allow: owner, ownerField: "members" }]) {
+  @aws_cognito_user_pools {
   id: ID!
   messages: [Message] @connection(name: "ConversationMsgs", sortField: "createdAt")
   associated: [ConversationLink] @connection(name: "AssociatedLinks")
@@ -29,7 +29,7 @@ type Conversation
 
 type Message 
   @model(subscriptions: null, queries: null) 
-  @auth(rules: [{ allow: owner, ownerField: "authorId" }]) {
+  @aws_cognito_user_pools {
   id: ID!
   author: UserData @connection(name: "UserMessages", keyField: "authorId")
   authorId: String

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph, Appbar, ActivityIndicator, Colors  } from 'react-native-paper';
+import { Button, Card, Title, Paragraph, Appbar, ActivityIndicator, Colors  } from 'react-native-paper';
 import styles from '../lib/Styles';
 
 import { useUserData } from '../lib/User';
@@ -17,9 +17,6 @@ export default ({ navigation }) => {
         } 
     }, [user]);
 
-    console.log('user on home page ====>', user);
-    const LeftContent = props => <Avatar.Icon {...props} icon='folder' />
-
     return (
         loading ? 
                 <View style={styles.container}>
@@ -33,7 +30,7 @@ export default ({ navigation }) => {
                         <Appbar.Content title={'effortLESS Chat'} />
                     </Appbar.Header>
                     <Card style={{width: width}}>
-                        <Card.Title title='Home' subtitle={user.screenName !== null ? user.screenName : ''} left={LeftContent} />
+                        <Card.Title title='Home' subtitle={user.screenName !== null ? user.screenName : ''} />
                         <Card.Content>
                         <Title>{user.username}</Title>
                         <Paragraph>Card content</Paragraph>

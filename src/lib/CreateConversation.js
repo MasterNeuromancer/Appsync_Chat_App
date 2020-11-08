@@ -1,53 +1,34 @@
-import { useEffect, useState } from 'react';
-import { API, graphqlOperation, Auth } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import { createConversation, createConversationLink } from '../graphql/mutations';
 
-export const CreateConversation = () => {
-    const [authUser, setAuthUser] = useState(null);
-    
-    const [loading, setLoading] = useState(null);
+const CreateConversation = async (toUser, currentUser) => {
+    try {
 
-    const checkAuthForUser = async () => {
-        const authResponse = await Auth.currentAuthenticatedUser();
-        // console.log('authResponse to check attributes ====>', authResponse.attributes);
-        const cognitoAttributesEmail = authResponse.attributes.email;
-        console.log('cognito username ====>', cognitoAttributesEmail);
-        setAuthUser(cognitoAttributesEmail);
-    };
+        const members = [toUser, currentUser].sort();
+        console.log('members in create conversation', members);
+        const conversationName = members.join(' and ');
+        console.log('conversationName in create conversation', conversationName);
 
-    useEffect(() => {
-        checkAuthForUser();
-    }, [checkAuthForUser]);
+        const convo = { name: conversationName, members: members };
+        const conversation = await API.graphql(graphqlOperation(createConversation, { input: convo }));
+        console.log('conversation in create conversation', conversation);
 
-    // useEffect(() => {
-    //     async function fetchUserData(authUser) {
-    //         try {
-    //             setLoading(true);
-    //             console.log('auth user in try catch', authUser);
-    //             const userResponse = await API.graphql(graphqlOperation(getUserData, { username: authUser } ));
-    //             console.log('user userResponse in hook ======>', userResponse);
-    //             setLoading(false);
-    //             const user = userResponse.data.getUserData;
-    //             if (user !== null) {
-    //                 console.log('user data in try catch, hook block, succesfully fetch ================>', user);
-    //                 setUserData(user);
-    //                 setLoading(false);
-    //             } else {
-    //                 console.log('authUser before creating', authUser);
-    //                 const createUserResponse = await API.graphql(graphqlOperation(createUserData, { input: { username: authUser } } ));
-    //                 console.log('creating user in appsync response ====> ', createUserResponse);
-    //                 setUserData(createUserResponse.data.createUserData); 
-    //                 setLoading(false);
-    //             }
-    //         } catch (error) {
-    //             console.log('error', error);
-    //             setLoading(false);
-    //         }
-    //     }
+        const { data: { createConversation: { id: conversationLinkConversationId }}} = conversation;
+        console.log('LinkConversationId in create conversation', conversationLinkConversationId);
+        
+        const relation1 = { conversationLinkUserId: currentUser, conversationLinkConversationId: conversationLinkConversationId };
+        const relation2 = { conversationLinkUserId: toUser, conversationLinkConversationId: conversationLinkConversationId };
+        await API.graphql(graphqlOperation(createConversationLink, { input: relation1 }));
+        await API.graphql(graphqlOperation(createConversationLink, { input: relation2 }));
 
-    //     if (authUser) {
-    //         console.log('got to auth user check this is it', authUser);
-    //         fetchUserData(authUser);
-    //     }
-    // }, [authUser]);
+        console.log('relation1 in create conversation', relation1);
+        console.log('relation2 in create conversation', relation2);
+
+    } catch (error) {
+
+        console.log('error creating conversations', error);
+
+    }
 };
+
+export default CreateConversation;

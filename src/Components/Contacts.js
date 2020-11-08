@@ -12,23 +12,28 @@ import {
     ActivityIndicator, 
     Colors, 
     List, 
-    Divider, 
-    Paragraph, 
-    Dialog, 
-    Portal } from 'react-native-paper';
+    Divider} from 'react-native-paper';
+import AddConversationDialog from './AddConversationDialog';
 import { useUsersList } from '../lib/AppUsers';
+import { useUserData } from '../lib/User';
 import styles from '../lib/Styles';
 
 const { width, height } = Dimensions.get('window');
 
 export default ({ navigation }) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [showDialog, setShowDialog] = useState(false);
+    const [toUser, setToUser] = useState(null);
+    const [otherUsers, setOtherUsers] = useState(null);
     const users = useUsersList();
+    const user =  useUserData();
 
-    console.log('users on contacts screen ====>', users);
-    
-    const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+    useEffect(() => {
+        if(user && users) {
+            setLoading(false);
+            setOtherUsers(users.filter((item) => item.username !== user.username));
+        }
+    }, [users, user]);
 
     return (
         loading ? 
@@ -43,16 +48,16 @@ export default ({ navigation }) => {
                         <Appbar.Content title={"effortLESS Chat"} />
                     </Appbar.Header>
                     <Card style={{width: width, height: height}}>
-                        <Card.Title title='Contacts' left={LeftContent} />
+                        <Card.Title title='Contacts' />
                         <Card.Content>
                         <FlatList
-                            data={users}
+                            data={otherUsers}
                             keyExtractor={item => item.id}
                             ItemSeparatorComponent={() => <Divider />}
                             renderItem={({item}) => (
                                 <Pressable
                                     onPress={() => {
-                                        console.log('item in contacts list', item);
+                                        setToUser(item.username);
                                         setShowDialog(true);
                                     }}
                                 >
@@ -64,17 +69,10 @@ export default ({ navigation }) => {
                             )}
                         />
                         </Card.Content>
-                        <Button onPress={() => navigation.navigate('Profile')}>Go to Profile</Button>
                     </Card>
-                    <Portal>
-                        <Dialog visible={showDialog} onDismiss={() => setShowDialog(false)}>
-                            <Dialog.Title>Create a new conversation with this user?</Dialog.Title>
-                            <Dialog.Content>
-                                <Paragraph style={{alignSelf:'center'}}>Create</Paragraph>
-                                <Button onPress={() => setShowDialog(false)}>Cancel</Button>
-                            </Dialog.Content>
-                        </Dialog>
-                    </Portal>
+
+                    {/* modal for adding new conversation (requires conversation members) */}
+                    <AddConversationDialog showDialog={showDialog} setShowDialog={setShowDialog} toUser={toUser} currentUser={user.username}/>
                 </>
     );
 };
