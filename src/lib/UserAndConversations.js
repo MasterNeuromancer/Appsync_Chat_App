@@ -10,7 +10,7 @@ export const useUserConversationData = () => {
 
     const checkAuthForUser = async () => {
         const authResponse = await Auth.currentAuthenticatedUser();
-        const cognitoAttributesEmail = authResponse.attributes.email;
+        const cognitoAttributesEmail = authResponse.username;
         setAuthUser(cognitoAttributesEmail);
     };
 
@@ -24,6 +24,7 @@ export const useUserConversationData = () => {
                 setLoading(true);
                 const userConversationsResponse = await API.graphql(graphqlOperation(getUserAndConversationsData, { username: authUser } ));
                 setLoading(false);
+                console.log('user and conversations', userConversationsResponse);
                 const userConversations = userConversationsResponse.data.getUserData.conversations.items;
                 if (userConversations !== null) {
                     setUserConversationData(userConversations);

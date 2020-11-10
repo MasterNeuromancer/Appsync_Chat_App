@@ -7,27 +7,6 @@ export const getUserData = /* GraphQL */ `
       id
       username
       screenName
-      conversations {
-        items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          id
-          userId
-          text
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -41,23 +20,11 @@ export const getUserAndConversationsData = /* GraphQL */ `
       screenName
       conversations (limit: 10000) {
         items {
-          id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
+          conversation {
+            id
+            name
+          }
         }
-      }
-      messages {
-        items {
-          id
-          userId
-          text
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
       }
       createdAt
       updatedAt
@@ -83,12 +50,6 @@ export const listUserDatas = /* GraphQL */ `
         id
         username
         screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
         createdAt
         updatedAt
       }

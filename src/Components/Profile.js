@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph, Appbar, ActivityIndicator, Colors  } from 'react-native-paper';
+import { Button, Card, Title, Paragraph, Appbar, ActivityIndicator, Colors  } from 'react-native-paper';
 import { Auth } from 'aws-amplify';
 import { useUserData } from '../lib/User';
 import styles from '../lib/Styles';
@@ -26,8 +26,6 @@ export default ({ navigation }) => {
         }
     };
 
-    const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
-
     return (
         loading ? 
             <View style={styles.container}>
@@ -41,7 +39,7 @@ export default ({ navigation }) => {
                     <Appbar.Content title={"effortLESS Chat"} />
                 </Appbar.Header>
                 <Card style={{width: width}}>
-                    <Card.Title title='Profile' subtitle={user.screenName !== null ? user.screenName : ''} left={LeftContent} />
+                    <Card.Title title='Profile' subtitle={user.screenName !== null ? user.screenName : ''} />
                     <Card.Content>
                     <Title>{user.username}</Title>
                     <Paragraph>Card content</Paragraph>

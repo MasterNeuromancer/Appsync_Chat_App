@@ -9,12 +9,6 @@ export const onCreateConversationLink = /* GraphQL */ `
         id
         username
         screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -59,9 +53,6 @@ export const onCreateMessage = /* GraphQL */ `
       text
       conversation {
         id
-        messages {
-          nextToken
-        }
         associated {
           nextToken
         }

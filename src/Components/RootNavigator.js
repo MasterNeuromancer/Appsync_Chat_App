@@ -1,12 +1,24 @@
 import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import HomeScreen from './Home';
 import Conversations from './Conversations';
+import ConversationDetails from './ConversationDetails';
 import Contacts from './Contacts';
 import Profile from './Profile';
 
+const Stack = createStackNavigator();
+
+const MessageStack = () => {
+  return (
+    <Stack.Navigator headerMode='none'>
+      <Stack.Screen name="Conversations" component={Conversations} headerMode='none'/>
+      <Stack.Screen name="ConversationDetails" component={ConversationDetails} headerMode='none'/>
+    </Stack.Navigator>
+  );
+};
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -30,7 +42,7 @@ export default () => {
       />
       <Tab.Screen
         name="Conversations"
-        component={Conversations}
+        component={MessageStack}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="message-text-outline" color={color} size={22} />

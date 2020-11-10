@@ -4,9 +4,7 @@ import {
     View, 
     FlatList, 
     Pressable } from 'react-native';
-import { 
-    Avatar, 
-    Button, 
+import {
     Card, 
     Appbar, 
     ActivityIndicator, 

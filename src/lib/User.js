@@ -11,7 +11,8 @@ export const useUserData = () => {
 
     const checkAuthForUser = async () => {
         const authResponse = await Auth.currentAuthenticatedUser();
-        const cognitoAttributesEmail = authResponse.attributes.email;
+        console.log('authRESPONSE', authResponse.username);
+        const cognitoAttributesEmail = authResponse.username;
         setAuthUser(cognitoAttributesEmail);
     };
 
@@ -23,10 +24,12 @@ export const useUserData = () => {
         async function fetchUserData(authUser) {
             try {
                 setLoading(true);
+                console.log('authUser in the hook', authUser);
                 const userResponse = await API.graphql(graphqlOperation(getUserData, { username: authUser } ));
                 setLoading(false);
                 const user = userResponse.data.getUserData;
-                if (user !== null) {setUserData(user);
+                if (user !== null) {
+                    setUserData(user);
                     setLoading(false);
                 } else {
                     const createUserResponse = await API.graphql(graphqlOperation(createUserData, { input: { username: authUser } } ));

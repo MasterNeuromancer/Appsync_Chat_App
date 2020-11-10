@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "appsyncchatapp9a23aa60_identitypool_9a23aa60",
+    "identityPoolName": "appsyncchatappf223992f_identitypool_f223992f",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "appsyn9a23aa60",
-    "userPoolName": "appsyncchatapp9a23aa60_userpool_9a23aa60",
+    "resourceNameTruncated": "appsynf223992f",
+    "userPoolName": "appsyncchatappf223992f_userpool_f223992f",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -18,8 +18,7 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email",
-        "preferred_username"
+        "email"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -29,11 +28,11 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "appsyn9a23aa60_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "appsynf223992f_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "useDefault": "manual",
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "appsyncchatapp9a23aa609a23aa60",
+    "resourceName": "appsyncchatappf223992ff223992f",
     "thirdPartyAuth": false,
     "userPoolGroups": false,
     "adminQueries": false,
