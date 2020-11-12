@@ -1,17 +1,30 @@
-import React from 'react';
-import { View, Text, Button, SafeAreaView } from 'react-native';
-import styles from '../lib/Styles';
+import React, { useEffect } from 'react';
+// import { View, Text, Button, SafeAreaView } from 'react-native';
+// import styles from '../lib/Styles';
+import {
+    GiftedChat,
+  } from 'react-native-gifted-chat';
+import useConversationMessages from '../lib/ConversationMessages';
 
-export default ({ navigation }) => (
-    <SafeAreaView style={ styles.container }>
-        <View>
-            <Text>
-                Hello from Conversation Details Screen!
-            </Text>
-            <Button
-                title='go to home screen!'
-                onPress={() => navigation.navigate('Home')}
-            />
-        </View>
-    </SafeAreaView>
-);
+export default  ({ route }) => {
+    const threadId = route.params.thread.conversation.id;
+    console.log('navigation params', threadId);
+    
+    const messages = useConversationMessages(threadId);
+
+    useEffect(() => {
+        if(messages){
+          console.log('empty messages in the conversation details page', messages);
+        }
+    }, [messages]);
+    
+    return (
+        <GiftedChat
+          messages={messages}
+          onSend={() => console.log('sending a message!!')}
+        //   user={{
+        //     _id: 1,
+        //   }}
+        />
+    );
+};

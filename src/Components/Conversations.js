@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View, FlatList, Pressable } from 'react-native';
-import { Button, Card, Appbar, ActivityIndicator, Colors, List, Divider } from 'react-native-paper';
+import { Card, Appbar, ActivityIndicator, Colors, List, Divider } from 'react-native-paper';
 import { useUserConversationData } from '../lib/UserAndConversations';
 import styles from '../lib/Styles';
 
@@ -37,7 +37,7 @@ export default ({ navigation }) => {
                             ItemSeparatorComponent={() => <Divider />}
                             renderItem={({item}) => (
                                 <Pressable
-                                    onPress={() => navigation.navigate('ConversationDetails')}
+                                    onPress={() => navigation.navigate('ConversationDetails', { thread: item })}
                                 >
                                     <List.Item
                                     title={item.conversation.name}
