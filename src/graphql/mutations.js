@@ -68,30 +68,9 @@ export const createMessage = /* GraphQL */ `
         id
         username
         screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
       userId
       text
-      conversation {
-        id
-        messages {
-          nextToken
-        }
-        associated {
-          nextToken
-        }
-        name
-        members
-        createdAt
-        updatedAt
-      }
       messageConversationId
       createdAt
       updatedAt
