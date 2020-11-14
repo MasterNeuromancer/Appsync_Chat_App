@@ -22,7 +22,7 @@ export const useUserConversationData = () => {
         async function fetchUserConversationData(authUser) {
             try {
                 setLoading(true);
-                const userConversationsResponse = await API.graphql(graphqlOperation(getUserAndConversationsData, { username: authUser } ));
+                const userConversationsResponse = await API.graphql(graphqlOperation(getUserAndConversationsData, { name: authUser } ));
                 setLoading(false);
                 console.log('user and conversations', userConversationsResponse);
                 const userConversations = userConversationsResponse.data.getUserData.conversations.items;

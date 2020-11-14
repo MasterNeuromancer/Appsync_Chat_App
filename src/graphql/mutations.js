@@ -7,9 +7,9 @@ export const createUserData = /* GraphQL */ `
     $condition: ModelUserDataConditionInput
   ) {
     createUserData(input: $input, condition: $condition) {
-      id
-      username
-      screenName
+      _id
+      name
+      avatar
       createdAt
       updatedAt
     }
@@ -21,9 +21,9 @@ export const updateUserData = /* GraphQL */ `
     $condition: ModelUserDataConditionInput
   ) {
     updateUserData(input: $input, condition: $condition) {
-      id
-      username
-      screenName
+      _id
+      name
+      avatar
       createdAt
       updatedAt
     }
@@ -35,9 +35,9 @@ export const deleteUserData = /* GraphQL */ `
     $condition: ModelUserDataConditionInput
   ) {
     deleteUserData(input: $input, condition: $condition) {
-      id
-      username
-      screenName
+      _id
+      name
+      avatar
       createdAt
       updatedAt
     }
@@ -49,7 +49,34 @@ export const createConversation = /* GraphQL */ `
     $condition: ModelConversationConditionInput
   ) {
     createConversation(input: $input, condition: $condition) {
-      id
+      _id
+      messages {
+        items {
+          _id
+          userId
+          text
+          image
+          video
+          audio
+          sent
+          received
+          pending
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      associated {
+        items {
+          _id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       name
       members
       createdAt
@@ -63,14 +90,99 @@ export const createMessage = /* GraphQL */ `
     $condition: ModelMessageConditionInput
   ) {
     createMessage(input: $input, condition: $condition) {
-      id
+      _id
       user {
-        id
-        username
-        screenName
+        _id
+        name
+        avatar
+        createdAt
+        updatedAt
       }
       userId
       text
+      image
+      video
+      audio
+      sent
+      received
+      pending
+      conversation {
+        _id
+        name
+        members
+        createdAt
+        updatedAt
+      }
+      messageConversationId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateMessage = /* GraphQL */ `
+  mutation UpdateMessage(
+    $input: UpdateMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    updateMessage(input: $input, condition: $condition) {
+      _id
+      user {
+        _id
+        name
+        avatar
+        createdAt
+        updatedAt
+      }
+      userId
+      text
+      image
+      video
+      audio
+      sent
+      received
+      pending
+      conversation {
+        _id
+        name
+        members
+        createdAt
+        updatedAt
+      }
+      messageConversationId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteMessage = /* GraphQL */ `
+  mutation DeleteMessage(
+    $input: DeleteMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    deleteMessage(input: $input, condition: $condition) {
+      _id
+      user {
+        _id
+        name
+        avatar
+        createdAt
+        updatedAt
+      }
+      userId
+      text
+      image
+      video
+      audio
+      sent
+      received
+      pending
+      conversation {
+        _id
+        name
+        members
+        createdAt
+        updatedAt
+      }
       messageConversationId
       createdAt
       updatedAt
@@ -83,8 +195,22 @@ export const createConversationLink = /* GraphQL */ `
     $condition: ModelConversationLinkConditionInput
   ) {
     createConversationLink(input: $input, condition: $condition) {
-      id
+      _id
+      user {
+        _id
+        name
+        avatar
+        createdAt
+        updatedAt
+      }
       conversationLinkUserId
+      conversation {
+        _id
+        name
+        members
+        createdAt
+        updatedAt
+      }
       conversationLinkConversationId
       createdAt
       updatedAt
@@ -97,29 +223,17 @@ export const updateConversationLink = /* GraphQL */ `
     $condition: ModelConversationLinkConditionInput
   ) {
     updateConversationLink(input: $input, condition: $condition) {
-      id
+      _id
       user {
-        id
-        username
-        screenName
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
+        _id
+        name
+        avatar
         createdAt
         updatedAt
       }
       conversationLinkUserId
       conversation {
-        id
-        messages {
-          nextToken
-        }
-        associated {
-          nextToken
-        }
+        _id
         name
         members
         createdAt

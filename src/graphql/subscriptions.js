@@ -4,17 +4,23 @@
 export const onCreateConversationLink = /* GraphQL */ `
   subscription OnCreateConversationLink($conversationLinkUserId: ID!) {
     onCreateConversationLink(conversationLinkUserId: $conversationLinkUserId) {
-      id
+      _id
       user {
-        id
-        username
-        screenName
+        _id
+        name
+        avatar
+        conversations {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
         createdAt
         updatedAt
       }
       conversationLinkUserId
       conversation {
-        id
+        _id
         messages {
           nextToken
         }
@@ -35,11 +41,11 @@ export const onCreateConversationLink = /* GraphQL */ `
 export const onCreateMessage = /* GraphQL */ `
   subscription OnCreateMessage($messageConversationId: ID!) {
     onCreateMessage(messageConversationId: $messageConversationId) {
-      id
+      _id
       user {
-        id
-        username
-        screenName
+        _id
+        name
+        avatar
         conversations {
           nextToken
         }
@@ -51,8 +57,17 @@ export const onCreateMessage = /* GraphQL */ `
       }
       userId
       text
+      image
+      video
+      audio
+      sent
+      received
+      pending
       conversation {
-        id
+        _id
+        messages {
+          nextToken
+        }
         associated {
           nextToken
         }
@@ -70,12 +85,12 @@ export const onCreateMessage = /* GraphQL */ `
 export const onCreateUserData = /* GraphQL */ `
   subscription OnCreateUserData {
     onCreateUserData {
-      id
-      username
-      screenName
+      _id
+      name
+      avatar
       conversations {
         items {
-          id
+          _id
           conversationLinkUserId
           conversationLinkConversationId
           createdAt
@@ -85,9 +100,15 @@ export const onCreateUserData = /* GraphQL */ `
       }
       messages {
         items {
-          id
+          _id
           userId
           text
+          image
+          video
+          audio
+          sent
+          received
+          pending
           messageConversationId
           createdAt
           updatedAt
@@ -102,12 +123,12 @@ export const onCreateUserData = /* GraphQL */ `
 export const onUpdateUserData = /* GraphQL */ `
   subscription OnUpdateUserData {
     onUpdateUserData {
-      id
-      username
-      screenName
+      _id
+      name
+      avatar
       conversations {
         items {
-          id
+          _id
           conversationLinkUserId
           conversationLinkConversationId
           createdAt
@@ -117,9 +138,15 @@ export const onUpdateUserData = /* GraphQL */ `
       }
       messages {
         items {
-          id
+          _id
           userId
           text
+          image
+          video
+          audio
+          sent
+          received
+          pending
           messageConversationId
           createdAt
           updatedAt
@@ -134,12 +161,12 @@ export const onUpdateUserData = /* GraphQL */ `
 export const onDeleteUserData = /* GraphQL */ `
   subscription OnDeleteUserData {
     onDeleteUserData {
-      id
-      username
-      screenName
+      _id
+      name
+      avatar
       conversations {
         items {
-          id
+          _id
           conversationLinkUserId
           conversationLinkConversationId
           createdAt
@@ -149,9 +176,15 @@ export const onDeleteUserData = /* GraphQL */ `
       }
       messages {
         items {
-          id
+          _id
           userId
           text
+          image
+          video
+          audio
+          sent
+          received
+          pending
           messageConversationId
           createdAt
           updatedAt

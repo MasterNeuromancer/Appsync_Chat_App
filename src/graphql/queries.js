@@ -2,29 +2,37 @@
 // this is an auto generated file. This will be overwritten
 
 export const getUserData = /* GraphQL */ `
-  query GetUserData($username: String!) {
-    getUserData(username: $username) {
-      id
-      username
-      screenName
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const getUserAndConversationsData = /* GraphQL */ `
-  query GetUserData($username: String!) {
-    getUserData(username: $username) {
-      id
-      username
-      screenName
-      conversations (limit: 10000) {
+  query GetUserData($name: String!) {
+    getUserData(name: $name) {
+      _id
+      name
+      avatar
+      conversations {
         items {
-          conversation {
-            id
-            name
-          }
+          _id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
         }
+        nextToken
+      }
+      messages {
+        items {
+          _id
+          userId
+          text
+          image
+          video
+          audio
+          sent
+          received
+          pending
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt
@@ -33,23 +41,29 @@ export const getUserAndConversationsData = /* GraphQL */ `
 `;
 export const listUserDatas = /* GraphQL */ `
   query ListUserDatas(
-    $username: String
+    $name: String
     $filter: ModelUserDataFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
     listUserDatas(
-      username: $username
+      name: $name
       filter: $filter
       limit: $limit
       nextToken: $nextToken
       sortDirection: $sortDirection
     ) {
       items {
-        id
-        username
-        screenName
+        _id
+        name
+        avatar
+        conversations {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -60,12 +74,18 @@ export const listUserDatas = /* GraphQL */ `
 export const getConversation = /* GraphQL */ `
   query GetConversation($id: ID!) {
     getConversation(id: $id) {
-      id
+      _id
       messages {
         items {
-          id
+          _id
           userId
           text
+          image
+          video
+          audio
+          sent
+          received
+          pending
           messageConversationId
           createdAt
           updatedAt
@@ -74,7 +94,7 @@ export const getConversation = /* GraphQL */ `
       }
       associated {
         items {
-          id
+          _id
           conversationLinkUserId
           conversationLinkConversationId
           createdAt

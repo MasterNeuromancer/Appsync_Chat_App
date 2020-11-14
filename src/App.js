@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import {ApolloProvider} from '@apollo/client';
+import appSyncClient from './lib/appsyncApollo';
 // import { Hub, Auth } from 'aws-amplify'
 
 // need to improve login/signup styling
@@ -22,9 +24,11 @@ const theme = {
 const App = () => {
   return (
     <NavigationContainer>
-      <PaperProvider theme={theme}>
+      <ApolloProvider client={appSyncClient}>
+        <PaperProvider theme={theme}>
           <RootNavigator/>
-      </PaperProvider>
+        </PaperProvider>
+      </ApolloProvider>
     </NavigationContainer>
   );
 };

@@ -1,10 +1,10 @@
 type UserData 
   @model
-  @key(fields:["username"]) 
+  @key(fields:["name"]) 
   @aws_cognito_user_pools {
-  id: ID!
-  username: String!
-  screenName: String
+  _id: ID!
+  name: String!
+  avatar: String
   conversations: [ConversationLink] @connection(name: "UserLinks")
   messages: [Message] @connection(name: "UserMessageList")
 	createdAt: String
@@ -18,7 +18,7 @@ type Conversation
     subscriptions: null
   )
   @aws_cognito_user_pools {
-  id: ID!
+  _id: ID!
   messages: [Message] @connection(name: "ConversationMsgs", sortField: "createdAt")
   associated: [ConversationLink] @connection(name: "AssociatedLinks")
   name: String!
@@ -30,10 +30,16 @@ type Conversation
 type Message 
   @model(subscriptions: null, queries: null) 
   @aws_cognito_user_pools {
-  id: ID!
+  _id: ID!
   user: UserData @connection(name: "UserMessageList", keyField: "userId")
   userId: String
   text: String!
+  image: String
+  video: String
+  audio: String
+  sent: Boolean
+  received: Boolean
+  pending: Boolean
   conversation: Conversation! @connection(name: "ConversationMsgs")
   messageConversationId: ID!
 	createdAt: String
@@ -46,7 +52,7 @@ type ConversationLink
     queries: null
     subscriptions: null
   ) {
-  id: ID!
+  _id: ID!
   user: UserData! @connection(name: "UserLinks")
   conversationLinkUserId: ID
   conversation: Conversation! @connection(name: "AssociatedLinks")
