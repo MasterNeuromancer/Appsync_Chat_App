@@ -50,33 +50,6 @@ export const createConversation = /* GraphQL */ `
   ) {
     createConversation(input: $input, condition: $condition) {
       _id
-      messages {
-        items {
-          _id
-          userId
-          text
-          image
-          video
-          audio
-          sent
-          received
-          pending
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      associated {
-        items {
-          _id
-          conversationLinkUserId
-          conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       name
       members
       createdAt

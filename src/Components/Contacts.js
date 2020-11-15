@@ -70,7 +70,7 @@ export default ({ navigation }) => {
                     </Card>
 
                     {/* modal for adding new conversation (requires conversation members) */}
-                    <AddConversationDialog showDialog={showDialog} setShowDialog={setShowDialog} toUser={toUser} currentUser={user.username}/>
+                    <AddConversationDialog showDialog={showDialog} setShowDialog={setShowDialog} toUser={toUser} currentUser={user.name}/>
                 </>
     );
 };
