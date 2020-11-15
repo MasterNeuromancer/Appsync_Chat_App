@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
+import uuid from 'uuid-random';
 import { getUserData } from '../graphql/queries';
 import { createUserData } from '../graphql/mutations';
-import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 
 export const useUserData = () => {
     const [authUser, setAuthUser] = useState(null);
@@ -34,9 +33,8 @@ export const useUserData = () => {
                     setUserData(user);
                     setLoading(false);
                 } else {
-                    const createUserResponse = await API.graphql(graphqlOperation(createUserData, { input: { name: authUser, id: uuidv4() } } ));
-                    console.log('create user response in hook', createUserResponse);
-                    // setUserData(createUserResponse.data.createUserData); 
+                    const createUserResponse = await API.graphql(graphqlOperation(createUserData, { input: { name: authUser, _id: uuid() } } ));
+                    setUserData(createUserResponse.data.createUserData); 
                     setLoading(false);
                 }
             } catch (error) {

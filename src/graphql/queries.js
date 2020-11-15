@@ -7,28 +7,22 @@ export const getUserData = /* GraphQL */ `
       _id
       name
       avatar
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const getUserAndConversationsData = /* GraphQL */ `
+  query GetUserData($name: String!) {
+    getUserData(name: $name) {
+      _id
+      name
+      avatar
       conversations {
         items {
           _id
           conversationLinkUserId
           conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          _id
-          userId
-          text
-          image
-          video
-          audio
-          sent
-          received
-          pending
-          messageConversationId
           createdAt
           updatedAt
         }
@@ -58,12 +52,6 @@ export const listUserDatas = /* GraphQL */ `
         _id
         name
         avatar
-        conversations {
-          nextToken
-        }
-        messages {
-          nextToken
-        }
         createdAt
         updatedAt
       }

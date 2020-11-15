@@ -12,8 +12,10 @@ export const useUsersList = () => {
             try {
                 setLoading(true);
                 const userListResponse = await API.graphql(graphqlOperation(listUserDatas, {limit: 10000}));
+                console.log('user list response', userListResponse);
                 setLoading(false);
                 const userList = userListResponse.data.listUserDatas.items;
+                console.log('loggin user list', userList);
                 if (userList !== null) {
                     setUserList(userList);
                     setLoading(false);

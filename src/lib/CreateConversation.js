@@ -13,7 +13,7 @@ const CreateConversation = async (toUser, currentUser) => {
         const conversation = await API.graphql(graphqlOperation(createConversation, { input: convo }));
         console.log('conversation in create conversation', conversation);
 
-        const { data: { createConversation: { id: conversationLinkConversationId }}} = conversation;
+        const { data: { createConversation: { _id: conversationLinkConversationId }}} = conversation;
         console.log('LinkConversationId in create conversation', conversationLinkConversationId);
         
         const relation1 = { conversationLinkUserId: currentUser, conversationLinkConversationId: conversationLinkConversationId };

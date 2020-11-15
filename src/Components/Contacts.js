@@ -29,7 +29,7 @@ export default ({ navigation }) => {
     useEffect(() => {
         if(user && users) {
             setLoading(false);
-            setOtherUsers(users.filter((item) => item.username !== user.username));
+            setOtherUsers(users.filter((item) => item.name !== user.name));
         }
     }, [users, user]);
 
@@ -50,17 +50,17 @@ export default ({ navigation }) => {
                         <Card.Content>
                         <FlatList
                             data={otherUsers}
-                            keyExtractor={item => item.id}
+                            keyExtractor={item => item._id}
                             ItemSeparatorComponent={() => <Divider />}
                             renderItem={({item}) => (
                                 <Pressable
                                     onPress={() => {
-                                        setToUser(item.username);
+                                        setToUser(item.name);
                                         setShowDialog(true);
                                     }}
                                 >
                                     <List.Item
-                                    title={item.username}
+                                    title={item.name}
                                     titleNumberOfLines={1}
                                     />
                                 </Pressable>
