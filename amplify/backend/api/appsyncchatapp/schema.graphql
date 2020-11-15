@@ -1,0 +1,71 @@
+type UserData 
+  @model
+  @key(fields:["name"]) 
+  @aws_cognito_user_pools {
+  _id: ID!
+  name: String!
+  avatar: String
+  conversations: [ConversationLink] @connection(name: "UserLinks")
+  messages: [Message] @connection(name: "UserMessageList")
+	createdAt: String
+	updatedAt: String
+}
+
+type Conversation
+  @key(fields:["name"])
+  @model(
+    mutations: { create: "createConversation" }
+    queries: { get: "getConversation" }
+    subscriptions: null
+  )
+  @aws_cognito_user_pools {
+  _id: ID!
+  messages: [Message] @connection(name: "ConversationMsgs", sortField: "createdAt")
+  associated: [ConversationLink] @connection(name: "AssociatedLinks")
+  name: String!
+  members: [String!]!
+	createdAt: String
+	updatedAt: String
+}
+
+type Message
+  @key(fields:["text"]) 
+  @model(subscriptions: null, queries: null) 
+  @aws_cognito_user_pools {
+  _id: ID!
+  user: UserData @connection(name: "UserMessageList", keyField: "userId")
+  userId: String
+  text: String!
+  image: String
+  video: String
+  audio: String
+  sent: Boolean
+  received: Boolean
+  pending: Boolean
+  conversation: Conversation! @connection(name: "ConversationMsgs")
+  messageConversationId: ID!
+	createdAt: String
+	updatedAt: String
+}
+
+type ConversationLink
+  @model(
+    mutations: { create: "createConversationLink", update: "updateConversationLink" }
+    queries: null
+    subscriptions: null
+  ) {
+  id: ID!
+  user: UserData! @connection(name: "UserLinks")
+  conversationLinkUserId: ID
+  conversation: Conversation! @connection(name: "AssociatedLinks")
+  conversationLinkConversationId: ID!
+	createdAt: String
+	updatedAt: String
+}
+
+type Subscription {
+  onCreateConversationLink(conversationLinkUserId: ID!): ConversationLink
+    @aws_subscribe(mutations: ["createConversationLink"])
+  onCreateMessage(messageConversationId: ID!): Message
+    @aws_subscribe(mutations: ["createMessage"])
+}

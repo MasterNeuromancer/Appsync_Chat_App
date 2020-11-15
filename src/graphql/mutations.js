@@ -24,6 +24,33 @@ export const updateUserData = /* GraphQL */ `
       _id
       name
       avatar
+      conversations {
+        items {
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          _id
+          userId
+          text
+          image
+          video
+          audio
+          sent
+          received
+          pending
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -38,6 +65,33 @@ export const deleteUserData = /* GraphQL */ `
       _id
       name
       avatar
+      conversations {
+        items {
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          _id
+          userId
+          text
+          image
+          video
+          audio
+          sent
+          received
+          pending
+          messageConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -79,13 +133,6 @@ export const createMessage = /* GraphQL */ `
       sent
       received
       pending
-      conversation {
-        _id
-        name
-        members
-        createdAt
-        updatedAt
-      }
       messageConversationId
       createdAt
       updatedAt
@@ -114,13 +161,6 @@ export const updateMessage = /* GraphQL */ `
       sent
       received
       pending
-      conversation {
-        _id
-        name
-        members
-        createdAt
-        updatedAt
-      }
       messageConversationId
       createdAt
       updatedAt
@@ -138,6 +178,12 @@ export const deleteMessage = /* GraphQL */ `
         _id
         name
         avatar
+        conversations {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -151,6 +197,12 @@ export const deleteMessage = /* GraphQL */ `
       pending
       conversation {
         _id
+        messages {
+          nextToken
+        }
+        associated {
+          nextToken
+        }
         name
         members
         createdAt
@@ -168,7 +220,7 @@ export const createConversationLink = /* GraphQL */ `
     $condition: ModelConversationLinkConditionInput
   ) {
     createConversationLink(input: $input, condition: $condition) {
-      _id
+      id
       user {
         _id
         name
@@ -196,17 +248,29 @@ export const updateConversationLink = /* GraphQL */ `
     $condition: ModelConversationLinkConditionInput
   ) {
     updateConversationLink(input: $input, condition: $condition) {
-      _id
+      id
       user {
         _id
         name
         avatar
+        conversations {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
         createdAt
         updatedAt
       }
       conversationLinkUserId
       conversation {
         _id
+        messages {
+          nextToken
+        }
+        associated {
+          nextToken
+        }
         name
         members
         createdAt
