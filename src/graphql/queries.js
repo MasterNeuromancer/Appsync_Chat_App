@@ -21,12 +21,12 @@ export const getUserAndConversationsData = /* GraphQL */ `
       conversations {
         items {
           id
-          conversationLinkUserId
-          conversationLinkConversationId
           conversation {
-            _id
+            id
             name
           }
+          conversationLinkUserId
+          conversationLinkConversationId
           createdAt
           updatedAt
         }
@@ -56,6 +56,9 @@ export const listUserDatas = /* GraphQL */ `
         _id
         name
         avatar
+        conversations {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -64,13 +67,12 @@ export const listUserDatas = /* GraphQL */ `
   }
 `;
 export const getConversation = /* GraphQL */ `
-  query GetConversation($name: String!) {
-    getConversation(name: $name) {
-      _id
+  query GetConversation($id: ID!) {
+    getConversation(id: $id) {
+      id
       messages {
         items {
           _id
-          userId
           text
           image
           video
@@ -79,6 +81,20 @@ export const getConversation = /* GraphQL */ `
           received
           pending
           messageConversationId
+          createdAt
+          updatedAt
+          user {
+            _id
+            name
+          }
+        }
+        nextToken
+      }
+      associated {
+        items {
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
           createdAt
           updatedAt
         }

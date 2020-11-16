@@ -12,15 +12,12 @@ export const onCreateConversationLink = /* GraphQL */ `
         conversations {
           nextToken
         }
-        messages {
-          nextToken
-        }
         createdAt
         updatedAt
       }
       conversationLinkUserId
       conversation {
-        _id
+        id
         messages {
           nextToken
         }
@@ -46,6 +43,9 @@ export const onCreateMessage = /* GraphQL */ `
         _id
         name
         avatar
+        conversations {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -57,7 +57,13 @@ export const onCreateMessage = /* GraphQL */ `
       received
       pending
       conversation {
-        _id
+        id
+        messages {
+          nextToken
+        }
+        associated {
+          nextToken
+        }
         name
         members
         createdAt
@@ -75,6 +81,16 @@ export const onCreateUserData = /* GraphQL */ `
       _id
       name
       avatar
+      conversations {
+        items {
+          id
+          conversationLinkUserId
+          conversationLinkConversationId
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -96,23 +112,6 @@ export const onUpdateUserData = /* GraphQL */ `
         }
         nextToken
       }
-      messages {
-        items {
-          _id
-          userId
-          text
-          image
-          video
-          audio
-          sent
-          received
-          pending
-          messageConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -129,23 +128,6 @@ export const onDeleteUserData = /* GraphQL */ `
           id
           conversationLinkUserId
           conversationLinkConversationId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      messages {
-        items {
-          _id
-          userId
-          text
-          image
-          video
-          audio
-          sent
-          received
-          pending
-          messageConversationId
           createdAt
           updatedAt
         }

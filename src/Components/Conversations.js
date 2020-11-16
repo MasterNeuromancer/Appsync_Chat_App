@@ -33,7 +33,7 @@ export default ({ navigation }) => {
                         <Card.Content>
                         <FlatList
                             data={userConversationData}
-                            keyExtractor={item => item.conversation._id}
+                            keyExtractor={item => item.conversation.id}
                             ItemSeparatorComponent={() => <Divider />}
                             renderItem={({item}) => (
                                 <Pressable

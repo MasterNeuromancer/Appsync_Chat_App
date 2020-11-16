@@ -39,9 +39,9 @@ export default ({ navigation }) => {
                     <Appbar.Content title={"effortLESS Chat"} />
                 </Appbar.Header>
                 <Card style={{width: width}}>
-                    <Card.Title title='Profile' subtitle={user.screenName !== null ? user.screenName : ''} />
+                    <Card.Title title='Profile' subtitle={user.name !== null ? user.name : ''} />
                     <Card.Content>
-                    <Title>{user.username}</Title>
+                    <Title>{user.name}</Title>
                     <Paragraph>Card content</Paragraph>
                     </Card.Content>
                     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />

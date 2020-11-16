@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "appsyncchatappd44687e4_identitypool_d44687e4",
+    "identityPoolName": "appsyncchatapp3d84ed44_identitypool_3d84ed44",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "appsynd44687e4",
-    "userPoolName": "appsyncchatappd44687e4_userpool_d44687e4",
+    "resourceNameTruncated": "appsyn3d84ed44",
+    "userPoolName": "appsyncchatapp3d84ed44_userpool_3d84ed44",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,11 +28,11 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "appsynd44687e4_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "appsyn3d84ed44_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "useDefault": "manual",
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "appsyncchatappd44687e4d44687e4",
+    "resourceName": "appsyncchatapp3d84ed443d84ed44",
     "thirdPartyAuth": false,
     "userPoolGroups": false,
     "adminQueries": false,

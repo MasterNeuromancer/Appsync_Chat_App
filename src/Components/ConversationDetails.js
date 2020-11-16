@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-// import { View, Text, Button, SafeAreaView } from 'react-native';
-// import styles from '../lib/Styles';
+import { View, Text, Button, SafeAreaView } from 'react-native';
+import { Card, Appbar, ActivityIndicator, Colors, List, Divider } from 'react-native-paper';
+import styles from '../lib/Styles';
 import {
     GiftedChat,
   } from 'react-native-gifted-chat';
 import { API, graphqlOperation } from 'aws-amplify';
-import { getConversation } from '../graphql/queries';
+import uuid from 'uuid-random';
 import { createMessage } from '../graphql/mutations';
 import { useUserData } from '../lib/User';
 import useConversationMessages from '../lib/ConversationMessages';
@@ -37,12 +38,17 @@ export default  ({ route }) => {
       const message = {
         messageConversationId: threadId,
         text: messageText,
-        userId: user.id
+        user: {
+          _id: user._id,
+          name: user.name
+        },
+        _id: uuid()
       }
+      console.log('full message before send', message);
       const createMessageResponse = await API.graphql(graphqlOperation(createMessage, { input: message } ));
       console.log('createMessageResponse response', createMessageResponse);
     } catch (error) {
-      console.log('error', error);
+      console.log('error creating message', error);
     }
   }
 
@@ -53,12 +59,17 @@ export default  ({ route }) => {
   };
     
   return (
+    !user ? 
+                <View style={styles.container}>
+                    <ActivityIndicator animating={true} color={Colors.red800} /> 
+                </View>
+                :
     <GiftedChat
       messages={messages}
       onSend={onSend}
-        //   user={{
-        //     _id: 1,
-        //   }}
+      user={{
+        _id: user._id,
+      }}
     />
   );
 };
