@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View, FlatList, Pressable } from 'react-native';
 import { Card, Appbar, ActivityIndicator, Colors, List, Divider } from 'react-native-paper';
+import { Auth } from 'aws-amplify';
 import { useUserConversationData } from '../lib/UserAndConversations';
 import styles from '../lib/Styles';
 
@@ -9,6 +10,17 @@ const { width, height } = Dimensions.get('window');
 export default ({ navigation }) => {
     const [loading, setLoading] = useState(true);
     const userConversationData = useUserConversationData();
+    const [userToken, setUserToken] = useState('');
+
+    const token = async () => {
+        const tokenResponse = await Auth.currentSession();
+        console.log('token response', tokenResponse.accessToken.jwtToken);
+        setUserToken(tokenResponse.accessToken.jwtToken);
+    };
+
+    useEffect(() => {
+        token();
+    }, []);
 
     useEffect(() => {
         if(userConversationData) {
@@ -37,7 +49,7 @@ export default ({ navigation }) => {
                             ItemSeparatorComponent={() => <Divider />}
                             renderItem={({item}) => (
                                 <Pressable
-                                    onPress={() => navigation.navigate('ConversationDetails', { thread: item })}
+                                    onPress={() => navigation.navigate('ConversationDetailsWrapper', { thread: item, token: userToken })}
                                 >
                                     <List.Item
                                     title={item.conversation.name}

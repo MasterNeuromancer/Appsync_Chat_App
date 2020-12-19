@@ -31,7 +31,7 @@ type Message
   @model(subscriptions: null, queries: null) 
   @aws_cognito_user_pools {
   _id: ID!
-  user: UserData!
+  user: UserData
   text: String!
   image: String
   video: String

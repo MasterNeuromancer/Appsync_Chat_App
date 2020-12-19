@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import HomeScreen from './Home';
 import Conversations from './Conversations';
-import ConversationDetails from './ConversationDetails';
+import ConversationDetailsWrapper from './ConversationDetailsWrapper';
 import Contacts from './Contacts';
 import Profile from './Profile';
 
@@ -15,7 +15,7 @@ const MessageStack = () => {
   return (
     <Stack.Navigator headerMode='none'>
       <Stack.Screen name="Conversations" component={Conversations} headerMode='none'/>
-      <Stack.Screen name="ConversationDetails" component={ConversationDetails} headerMode='none'/>
+      <Stack.Screen name="ConversationDetailsWrapper" component={ConversationDetailsWrapper} headerMode='none'/>
     </Stack.Navigator>
   );
 };

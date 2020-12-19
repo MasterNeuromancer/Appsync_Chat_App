@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Amplify from 'aws-amplify';
+import config from '../aws-exports';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import {ApolloProvider} from '@apollo/client';
-import appSyncClient from './lib/appsyncApollo';
-// import { Hub, Auth } from 'aws-amplify'
+// import appSyncClient from './lib/appsyncApollo';
+// import { Hub, Auth } from 'aws-amplify';
 
 // need to improve login/signup styling
 // import AmplifyTheme from 'aws-amplify-react-native/src/AmplifyTheme';
 
 import RootNavigator from './Components/RootNavigator';
+
+Amplify.configure(config);
 
 const theme = {
   ...DefaultTheme,
@@ -24,11 +28,11 @@ const theme = {
 const App = () => {
   return (
     <NavigationContainer>
-      <ApolloProvider client={appSyncClient}>
+      {/* <ApolloProvider client={appSyncClient}> */}
         <PaperProvider theme={theme}>
           <RootNavigator/>
         </PaperProvider>
-      </ApolloProvider>
+      {/* </ApolloProvider> */}
     </NavigationContainer>
   );
 };
