@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Button, SafeAreaView } from 'react-native';
-import { Card, Appbar, ActivityIndicator, Colors, List, Divider } from 'react-native-paper';
+import React from 'react';
+import { View } from 'react-native';
+import { ActivityIndicator, Colors } from 'react-native-paper';
 import styles from '../lib/Styles';
-import {
-    GiftedChat,
-  } from 'react-native-gifted-chat';
+import { GiftedChat } from 'react-native-gifted-chat';
 import { API, graphqlOperation } from 'aws-amplify';
 import uuid from 'uuid-random';
 import { createMessage } from '../graphql/mutations';
 import { useUserData } from '../lib/User';
-import { getConversation } from '../graphql/queries';
-import {useLazyQuery, gql, useSubscription} from '@apollo/client';
 import useConversationMessages from '../lib/ConversationMessages';
 
 export default  ({ id }) => {
@@ -19,7 +15,6 @@ export default  ({ id }) => {
 
   const createNewMessage = async (messageText) => {
     try {
-      console.log('threadId in create messages', id);
       const message = {
         messageConversationId: id,
         text: messageText,
@@ -29,8 +24,7 @@ export default  ({ id }) => {
         },
         _id: uuid()
       }
-      const createMessageResponse = await API.graphql(graphqlOperation(createMessage, { input: message } ));
-      console.log('createMessageResponse response', createMessageResponse);
+      await API.graphql(graphqlOperation(createMessage, { input: message } ));
     } catch (error) {
       console.log('error creating message', error);
     }

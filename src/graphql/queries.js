@@ -70,7 +70,7 @@ export const getConversation = /* GraphQL */ `
   query GetConversation($id: ID!) {
     getConversation(id: $id) {
       id
-      messages {
+      messages (sortDirection: DESC, limit: 100000) {
         items {
           _id
           text

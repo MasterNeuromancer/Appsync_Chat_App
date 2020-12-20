@@ -4,9 +4,6 @@ import config from '../aws-exports';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import {ApolloProvider} from '@apollo/client';
-// import appSyncClient from './lib/appsyncApollo';
-// import { Hub, Auth } from 'aws-amplify';
 
 // need to improve login/signup styling
 // import AmplifyTheme from 'aws-amplify-react-native/src/AmplifyTheme';
@@ -28,11 +25,9 @@ const theme = {
 const App = () => {
   return (
     <NavigationContainer>
-      {/* <ApolloProvider client={appSyncClient}> */}
-        <PaperProvider theme={theme}>
-          <RootNavigator/>
-        </PaperProvider>
-      {/* </ApolloProvider> */}
+      <PaperProvider theme={theme}>
+        <RootNavigator/>
+      </PaperProvider>
     </NavigationContainer>
   );
 };
