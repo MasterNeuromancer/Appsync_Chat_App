@@ -8,8 +8,10 @@ const useConversationMessages = (threadId) => {
   const [messages, setMessages] = useState([]);
   const [GetConversation, {data: conversationQueryResults, refetch: refetchConversation}] = useLazyQuery(gql(getConversation), {variables: {id: threadId}});
   // const { data: newMessage } = useSubscription(gql(onCreateMessage));
-  const {data: onNewMessage, loading, error} = useSubscription(gql(onCreateMessage)); 
+  const {data: onNewMessage, loading, error} = useSubscription(gql(onCreateMessage), {variables: {messageConversationId: threadId}}); 
     
+  console.log('onCreateMessage new message', onNewMessage);
+
   useEffect(() => {
     if (threadId) {
       console.log('thread id in conversation messages use effect', threadId);
