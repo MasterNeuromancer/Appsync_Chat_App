@@ -10,18 +10,7 @@ const { width, height } = Dimensions.get('window');
 export default ({ navigation }) => {
     const [loading, setLoading] = useState(true);
     const userConversationData = useUserConversationData();
-    const [userToken, setUserToken] = useState('');
-
-    const token = async () => {
-        const tokenResponse = await Auth.currentSession();
-        console.log('token response', tokenResponse.accessToken.jwtToken);
-        setUserToken(tokenResponse.accessToken.jwtToken);
-    };
-
-    useEffect(() => {
-        token();
-    }, []);
-
+    
     useEffect(() => {
         if(userConversationData) {
             setLoading(false);
@@ -49,7 +38,7 @@ export default ({ navigation }) => {
                             ItemSeparatorComponent={() => <Divider />}
                             renderItem={({item}) => (
                                 <Pressable
-                                    onPress={() => navigation.navigate('ConversationDetailsWrapper', { thread: item, token: userToken })}
+                                    onPress={() => navigation.navigate('ConversationDetails', { thread: item})}
                                 >
                                     <List.Item
                                     title={item.conversation.name}

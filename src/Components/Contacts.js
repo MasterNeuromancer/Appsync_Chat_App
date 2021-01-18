@@ -28,6 +28,7 @@ export default ({ navigation }) => {
 
     useEffect(() => {
         if(user && users) {
+            console.log('users in contacst', users);
             setLoading(false);
             setOtherUsers(users.filter((item) => item.name !== user.name));
         }

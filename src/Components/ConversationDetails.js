@@ -9,14 +9,15 @@ import { createMessage } from '../graphql/mutations';
 import { useUserData } from '../lib/User';
 import useConversationMessages from '../lib/ConversationMessages';
 
-export default  ({ id }) => {
+export default  ({ route }) => {
+  const threadId = route.params.thread.conversation.id;
   const user =  useUserData();
-  const messages = useConversationMessages(id);
+  const messages = useConversationMessages(threadId);
 
   const createNewMessage = async (messageText) => {
     try {
       const message = {
-        messageConversationId: id,
+        messageConversationId: threadId,
         text: messageText,
         user: {
           _id: user._id,

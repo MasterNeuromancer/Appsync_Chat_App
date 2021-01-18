@@ -1,5 +1,6 @@
 import { AppRegistry, LogBox } from 'react-native';
-
+import Amplify from 'aws-amplify';
+import config from './aws-exports';
 import App from './src/App';
 import { name as appName } from './app.json';
 
@@ -11,8 +12,6 @@ LogBox.ignoreLogs([
   'Require cycle: node_modules/@aws-amplify',
 ]);
 
-import Amplify from 'aws-amplify'
-import config from './aws-exports'
-Amplify.configure(config)
+Amplify.configure(config);
 
 AppRegistry.registerComponent(appName, () => App);
