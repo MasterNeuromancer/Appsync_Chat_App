@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View, FlatList, Pressable } from 'react-native';
 import { Card, Appbar, ActivityIndicator, Colors, List, Divider } from 'react-native-paper';
-import { Auth } from 'aws-amplify';
 import { useUserConversationData } from '../lib/UserAndConversations';
 import styles from '../lib/Styles';
 

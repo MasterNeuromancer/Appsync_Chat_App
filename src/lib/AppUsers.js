@@ -16,5 +16,5 @@ export const useUsersList = () => {
         }
     }, [usersListDataResult]);
 
-    return userList || [];
+    return userList;
 };

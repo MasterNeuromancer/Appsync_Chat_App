@@ -12,6 +12,7 @@ import {
     List, 
     Divider} from 'react-native-paper';
 import AddConversationDialog from './AddConversationDialog';
+import { useUserConversationData } from '../lib/UserAndConversations';
 import { useUsersList } from '../lib/AppUsers';
 import { useUserData } from '../lib/User';
 import styles from '../lib/Styles';
@@ -23,16 +24,46 @@ export default ({ navigation }) => {
     const [showDialog, setShowDialog] = useState(false);
     const [toUser, setToUser] = useState(null);
     const [otherUsers, setOtherUsers] = useState(null);
+    const userConversationData = useUserConversationData();
     const users = useUsersList();
     const user =  useUserData();
 
     useEffect(() => {
         if(user && users) {
-            console.log('users in contacst', users);
+            // console.log('users in contacst', users);
             setLoading(false);
             setOtherUsers(users.filter((item) => item.name !== user.name));
         }
     }, [users, user]);
+
+    useEffect(() => {
+        if(userConversationData){
+            console.log('userConversationData in Contacts', userConversationData);
+        }
+    }, [userConversationData]);
+
+    const goToOrCreateConversation = () => {
+        // Create function that checks if there is a conversation that already exists
+        // otherwise, open confirm Dialog to create new conversation between users
+        // check using convolink or userIds or userNames... IDK yet
+        
+        try {
+            if(!userConversationData){
+                //If there is absolutely no conversation data.
+                // Need to check before creating this
+            } else {
+                
+            }
+        } catch (error) {
+            // Check user conversations for conversation names that include
+            // both the user and the contact being clicked on
+            // need to pass contact name to function
+            userConversationData.forEach(x => {
+                if (x.id !== delta.id);
+                setMessages([delta, ...messages,]);
+            });
+        };
+    };
 
     return (
         loading ? 
