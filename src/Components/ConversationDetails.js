@@ -10,14 +10,15 @@ import { useUserData } from '../lib/User';
 import useConversationMessages from '../lib/ConversationMessages';
 
 export default  ({ route }) => {
-  const threadId = route.params.thread.conversation.id;
+  console.log('route.params =====> ', route.params.conversationId);
+  const conversationId = route.params.conversationId;
   const user =  useUserData();
-  const messages = useConversationMessages(threadId);
+  const messages = useConversationMessages(conversationId);
 
   const createNewMessage = async (messageText) => {
     try {
       const message = {
-        messageConversationId: threadId,
+        messageConversationId: conversationId,
         text: messageText,
         user: {
           _id: user._id,

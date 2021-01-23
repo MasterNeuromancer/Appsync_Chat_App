@@ -36,32 +36,40 @@ export default ({ navigation }) => {
         }
     }, [users, user]);
 
-    useEffect(() => {
-        if(userConversationData){
-            console.log('userConversationData in Contacts', userConversationData);
-        }
-    }, [userConversationData]);
+    // useEffect(() => {
+    //     if(userConversationData){
+    //         console.log('userConversationData in Contacts', userConversationData);
+    //     }
+    // }, [userConversationData]);
 
-    const goToOrCreateConversation = () => {
+    const onContactPress = (item) => {
         // Create function that checks if there is a conversation that already exists
         // otherwise, open confirm Dialog to create new conversation between users
-        // check using convolink or userIds or userNames... IDK yet
         
         try {
-            if(!userConversationData){
-                //If there is absolutely no conversation data.
-                // Need to check before creating this
-            } else {
+            if(item && userConversationData){
+                console.log('item in onContactClick', item);
+                console.log('userConversationData in onContactClick', userConversationData);
+    
+                const existingConversation = userConversationData.find(userConversation => userConversation.conversation.name.includes(item.name));
+                const existingConversationId = existingConversation?.conversation?.id
                 
-            }
+                console.log('existing conversation', existingConversation);
+                console.log('existingConversationId', existingConversationId);
+                
+                if(existingConversation){
+                    navigation.navigate('ConversationDetails', { conversationId: existingConversationId});
+                } else {
+                    setToUser(item.name);
+                    setShowDialog(true);
+                }
+
+            };
         } catch (error) {
             // Check user conversations for conversation names that include
             // both the user and the contact being clicked on
             // need to pass contact name to function
-            userConversationData.forEach(x => {
-                if (x.id !== delta.id);
-                setMessages([delta, ...messages,]);
-            });
+            console.log('onContactPress Error =====> ', error);
         };
     };
 
@@ -86,10 +94,11 @@ export default ({ navigation }) => {
                             ItemSeparatorComponent={() => <Divider />}
                             renderItem={({item}) => (
                                 <Pressable
-                                    onPress={() => {
-                                        setToUser(item.name);
-                                        setShowDialog(true);
-                                    }}
+                                    // onPress={() => {
+                                    //     setToUser(item.name);
+                                    //     setShowDialog(true);
+                                    // }}
+                                    onPress={()=> onContactPress(item)}
                                 >
                                     <List.Item
                                     title={item.name}

@@ -26,6 +26,7 @@ export const useUserConversationData = () => {
 
     useEffect(() => {
         if (userConversationsQueryResult) {
+            console.log('userConversationsQueryResult =====> ', userConversationsQueryResult);
             setUserConversationData(userConversationsQueryResult.getUserData.conversations.items);
         }
     }, [userConversationsQueryResult]);
