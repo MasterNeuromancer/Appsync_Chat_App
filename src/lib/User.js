@@ -8,7 +8,7 @@ import { createUserData } from '../graphql/mutations';
 export const useUserData = () => {
     const [authUser, setAuthUser] = useState(null);
     const [userData, setUserData] = useState(null);
-    const [getUserOwnData, {data: usersOwnDataQueryResult}] = useLazyQuery(gql(getUserData), {variables: { name: authUser }});
+    const [getUserOwnData, {data: usersOwnDataQueryResult, refetch: refetchUsersData}] = useLazyQuery(gql(getUserData), {variables: { name: authUser }});
 
     const checkAuthForUser = async () => {
         const authResponse = await Auth.currentAuthenticatedUser();
@@ -27,8 +27,21 @@ export const useUserData = () => {
     }, [authUser]);
 
     useEffect(() => {
+        async function createNewUserData() {
+            console.log('creating new user ====> ', authUser);
+            const createUserResponse = await API.graphql(graphqlOperation(createUserData, { input: { name: authUser, _id: uuid() } } ));
+            if(createUserResponse.data.createUserData){
+                refetchUsersData();
+            };
+        }
+
         if (usersOwnDataQueryResult) {
-            setUserData(usersOwnDataQueryResult.getUserData);
+            console.log('usersOwnDataQueryResult', usersOwnDataQueryResult);
+            if(usersOwnDataQueryResult.getUserData === null) {
+                createNewUserData();
+            } else {
+                setUserData(usersOwnDataQueryResult.getUserData);
+            }
         }
     }, [usersOwnDataQueryResult]);
 

@@ -26,7 +26,8 @@ export default  ({ route }) => {
         },
         _id: uuid()
       }
-      await API.graphql(graphqlOperation(createMessage, { input: message } ));
+      const sendingMessage = await API.graphql(graphqlOperation(createMessage, { input: message } ));
+      console.log('sending message =====> ', sendingMessage);
     } catch (error) {
       console.log('error creating message', error);
     }

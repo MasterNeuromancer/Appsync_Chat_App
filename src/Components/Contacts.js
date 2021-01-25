@@ -31,16 +31,10 @@ export default ({ navigation }) => {
     useEffect(() => {
         if(user && users) {
             // console.log('users in contacst', users);
-            setLoading(false);
             setOtherUsers(users.filter((item) => item.name !== user.name));
+            setLoading(false);
         }
     }, [users, user]);
-
-    // useEffect(() => {
-    //     if(userConversationData){
-    //         console.log('userConversationData in Contacts', userConversationData);
-    //     }
-    // }, [userConversationData]);
 
     const onContactPress = (item) => {
         // Create function that checks if there is a conversation that already exists
