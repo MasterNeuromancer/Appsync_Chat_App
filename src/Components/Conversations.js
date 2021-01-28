@@ -40,7 +40,14 @@ export default ({ navigation }) => {
                             ItemSeparatorComponent={() => <Divider />}
                             renderItem={({item}) => (
                                 <Pressable
-                                    onPress={() => navigation.navigate('ConversationDetails', { conversationId: item.conversation.id})}
+                                    onPress={() => 
+                                        navigation.navigate('ConversationDetails', 
+                                            { 
+                                                conversationId: item.conversation.id, 
+                                                name: item.conversation.name
+                                            }
+                                        )
+                                    }
                                 >
                                     <List.Item
                                     title={item.conversation.name}

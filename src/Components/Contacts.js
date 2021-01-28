@@ -47,12 +47,19 @@ export default ({ navigation }) => {
     
                 const existingConversation = userConversationData.find(userConversation => userConversation.conversation.name.includes(item.name));
                 const existingConversationId = existingConversation?.conversation?.id
+                const existingConversationName = existingConversation?.conversation?.name
                 
                 console.log('existing conversation', existingConversation);
                 console.log('existingConversationId', existingConversationId);
+                console.log('existingConversationName', existingConversationName);
                 
                 if(existingConversation){
-                    navigation.navigate('ConversationDetails', { conversationId: existingConversationId});
+                    navigation.navigate('ConversationDetails', 
+                        { 
+                            conversationId: existingConversationId, 
+                            name: existingConversationName
+                        }
+                    );
                 } else {
                     setToUser(item.name);
                     setShowDialog(true);

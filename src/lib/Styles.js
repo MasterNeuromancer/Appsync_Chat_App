@@ -14,4 +14,8 @@ export default StyleSheet.create({
       justifyContent: 'center',
       elevation: 4,
     },
+    sendingContainer: {
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
 });
