@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import { ActivityIndicator, IconButton, Colors } from 'react-native-paper';
+import { Dimensions, View } from 'react-native';
+import { ActivityIndicator, Appbar, IconButton, Colors } from 'react-native-paper';
 import styles from '../lib/Styles';
 import { GiftedChat, Bubble, Send  } from 'react-native-gifted-chat';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -8,6 +8,8 @@ import uuid from 'uuid-random';
 import { createMessage } from '../graphql/mutations';
 import { useUserData } from '../lib/User';
 import useConversationMessages from '../lib/ConversationMessages';
+
+const { width, height } = Dimensions.get('window');
 
 export default  ({ route }) => {
   console.log('route.params =====> ', route.params);
@@ -45,6 +47,9 @@ export default  ({ route }) => {
         wrapperStyle={{
           right: {
             backgroundColor: '#44bcd8'
+          },
+          left: {
+            backgroundColor: '#44bcd8'
           }
         }}
         textStyle={{
@@ -68,7 +73,7 @@ export default  ({ route }) => {
 
   const scrollToBottomComponent = () => {
     return (
-      <View >
+      <View>
         <IconButton icon='chevron-double-down' size={36} color='#44bcd8'/>
       </View>
     );
@@ -81,19 +86,25 @@ export default  ({ route }) => {
           <ActivityIndicator animating={true} color={Colors.red800} /> 
         </View>
           :          
-            <GiftedChat
-              messages={messages}
-              onSend={onSend}
-              user={{
-                _id: user._id,
-              }}
-              showUserAvatar
-              renderBubble={renderBubble}
-              alwaysShowSend
-              renderUsernameOnMessage
-              renderSend={renderSend}
-              scrollToBottom
-              scrollToBottomComponent={scrollToBottomComponent}
-            />
+            <>
+              <Appbar.Header width={width}>
+                  <Appbar.BackAction onPress={()=>console.log('hello')} />
+                  <Appbar.Content title={conversationName} />
+              </Appbar.Header>
+              <GiftedChat
+                messages={messages}
+                onSend={onSend}
+                user={{
+                  _id: user._id,
+                }}
+                showUserAvatar
+                renderBubble={renderBubble}
+                alwaysShowSend
+                renderUsernameOnMessage
+                renderSend={renderSend}
+                scrollToBottom
+                scrollToBottomComponent={scrollToBottomComponent}
+              />
+            </>
   );
 };
