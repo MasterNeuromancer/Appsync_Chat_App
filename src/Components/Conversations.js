@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, View, FlatList, Pressable } from 'react-native';
 import { Card, Appbar, ActivityIndicator, Colors, List, Divider } from 'react-native-paper';
-import { useUserData } from '../lib/User';
 import { useUserConversationData } from '../lib/UserAndConversations';
 import styles from '../lib/Styles';
 
@@ -9,16 +8,15 @@ import styles from '../lib/Styles';
 const { width, height } = Dimensions.get('window');
 
 export default ({ navigation }) => {
-    const user = useUserData();
     const userConversationData = useUserConversationData();
+    
     const [loading, setLoading] = useState(true);
     
     useEffect(() => {
-        if(userConversationData && user) {
+        if(userConversationData) {
             setLoading(false);
         }
     }, [userConversationData]);
-    console.log('conversations in conversation screen', userConversationData);
 
     return (
         loading ? 

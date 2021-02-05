@@ -10,7 +10,10 @@ export const useUserConversationData = () => {
     const [getUserConversationsData, {data: userConversationsQueryResult, refetch: refetchUserConversations}] = useLazyQuery(gql(getUserAndConversationsData), {variables: { name: authUser }});
     
     // Needs to have userId before subscription can be activated
-    // const {data: onNewConversationLink} = useSubscription(gql(onCreateConversationLink), {variables: {conversationLinkUserId: userConversationsQueryResult.getUserData._id}}); 
+    // if (userId) {
+    //     const {data: onNewConversationLink} = useSubscription(gql(onCreateConversationLink), {variables: {conversationLinkUserId: userId}});
+    // }
+    const {data: onNewConversationLink} = useSubscription(gql(onCreateConversationLink), {variables: {conversationLinkUserId: userConversationsQueryResult?.getUserData._id}}); 
 
     const checkAuthForUser = async () => {
         const authResponse = await Auth.currentAuthenticatedUser();
@@ -37,12 +40,12 @@ export const useUserConversationData = () => {
 
     // Missing userId for conversationLink subscription
     //
-    // useEffect(() => {
-    //     if (onNewConversationLink) {
-    //         console.log('created newConversationLink', onCreateConversationLink);
-    //         refetchUserConversations();
-    //     }
-    // }, [onNewConversationLink]);
+    useEffect(() => {
+        if (onNewConversationLink) {
+            console.log('created newConversationLink', onNewConversationLink);
+            refetchUserConversations();
+        }
+    }, [onNewConversationLink]);
 
     return userConversationData || [];
 };

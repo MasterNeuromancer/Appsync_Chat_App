@@ -8,7 +8,6 @@ const ApolloAuthWrapper = () => {
 
     const token = async () => {
         const tokenResponse = await Auth.currentSession();
-        console.log('token response', tokenResponse.accessToken.jwtToken);
         setUserToken(tokenResponse.accessToken.jwtToken);
     };
 
