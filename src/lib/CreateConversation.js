@@ -4,6 +4,7 @@ import { createConversation, createConversationLink } from '../graphql/mutations
 const CreateConversation = async (toUser, currentUser) => {
     try {
 
+        console.log('hello world Im testing git');
         const members = [toUser, currentUser].sort();
         console.log('members in create conversation', members);
         const conversationName = members.join(' and ');
