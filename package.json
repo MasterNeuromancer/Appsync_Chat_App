@@ -19,7 +19,7 @@
 		"amazon-cognito-identity-js": "^4.3.4",
 		"aws-amplify": "^3.0.22",
 		"aws-amplify-react-native": "^4.2.3",
-		"minimist": ">=1.2.3",
+		"minimist": ">=1.2.6",
 		"react": "^16.13.1",
 		"react-native": "0.63.2",
 		"react-native-gesture-handler": "^1.7.0",
